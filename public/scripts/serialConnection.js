@@ -25,6 +25,9 @@ requestPortButton.onclick = async (event) => {
 			// filters: [{ usbVendorId: 0x0d28, usbProductId: 0x0204 }]
 		});
 		console.log(port);
+		document.getElementById('connectPort').style.display = 'block';
+	} catch (error) {
+		console.log(error);
 	} finally {
 		document.body.style.display = '';
 	}

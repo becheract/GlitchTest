@@ -8,7 +8,8 @@ h2 {
 	text-align: right;
 }
 
-#openPort {
+#openPort,
+#connectPort {
 	display: none;
 }
 

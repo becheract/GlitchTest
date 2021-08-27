@@ -3,18 +3,11 @@
 
 // the link to your model provided by Teachable Machine export panel
 
-let model, webcam, labelContainer, maxPredictions, found;
-
 // Load the image model and setup the webcam
-async function init(URL, found) {
-	const modelURL = URL + 'model.json';
-	const metadataURL = URL + 'metadata.json';
+async function initImg() {
+	document.getElementById('canvas').style.display = 'none';
+	document.getElementById('webcam-container').style.display = 'block';
 
-	// load the model and metadata
-	// Refer to tmImage.loadFromFiles() in the API to support files from a file picker
-	// or files from your local hard drive
-	// Note: the pose library adds "tmImage" object to your window (window.tmImage)
-	model = await tmImage.load(modelURL, metadataURL);
 	maxPredictions = model.getTotalClasses();
 
 	// Convenience function to setup a webcam
@@ -22,7 +15,7 @@ async function init(URL, found) {
 	webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
 	await webcam.setup(); // request access to the webcam
 	await webcam.play();
-	window.requestAnimationFrame(loop);
+	window.requestAnimationFrame(imgLoop);
 
 	// append elements to the DOM
 	// document.getElementById('webcam-container').innerHTML = camera;
@@ -41,16 +34,16 @@ async function init(URL, found) {
 	}
 }
 
-async function loop() {
+async function imgLoop() {
 	if (!found) {
 		webcam.update(); // update the webcam frame
-		await predict();
-		window.requestAnimationFrame(loop);
+		await ImgPredict();
+		window.requestAnimationFrame(imgLoop);
 	}
 }
 
 // run the webcam image through the image model
-async function predict() {
+async function ImgPredict() {
 	// predict can take in an image, video or canvas html element
 	const prediction = await model.predict(webcam.canvas);
 
