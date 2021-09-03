@@ -26,12 +26,13 @@
 				<hr />
 			</span>
 			<input id="teachableUrl" type="url" placeholder="https://teachablemachine.withgoogle.com/models/[...]" pattern="https://.*" required />
-			<button id="submitUrl">Submit URL</button>
+			<button id="submitUrl" onclick="submitUrl()">Submit URL</button>
 			<hr />
 
 			<div>Teachable Machine</div>
+			<button id="startButton">Start!</button>
 			<div id="webcam-container"></div>
-			<div><canvas id="canvas"></canvas></div>
+			<canvas id="canvas"></canvas>
 
 			<div id="label-container"></div>
 		</span>

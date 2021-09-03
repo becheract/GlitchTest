@@ -19,12 +19,14 @@ async function createModel(checkpointURL, metadataURL) {
 }
 
 async function initAudio(modelURL, metadataURL) {
-	document.getElementById('webcam-container').style.display = 'none';
-	document.getElementById('canvas').style.display = 'none';
+	$('#webcam-container').hide();
+	$('#canvas').hide();
+	$('#label-container').show();
 
 	const recognizer = await createModel(modelURL, metadataURL);
 	const classLabels = recognizer.wordLabels(); // get class labels
 	const labelContainer = document.getElementById('label-container');
+	$('#startButton').hide();
 	for (let i = 0; i < classLabels.length; i++) {
 		labelContainer.appendChild(document.createElement('div'));
 	}
@@ -41,8 +43,7 @@ async function initAudio(modelURL, metadataURL) {
 				labelContainer.childNodes[i].innerHTML = classPrediction;
 
 				if (result.scores[i].toFixed(2) > 0.9 && classLabels[i] !== 'Background Noise') {
-					serialSubmit(classPrediction);
-					break;
+					serialSubmit(classLabels[i]);
 				}
 			}
 		},

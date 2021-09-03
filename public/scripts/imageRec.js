@@ -5,8 +5,9 @@
 
 // Load the image model and setup the webcam
 async function initImg() {
-	document.getElementById('canvas').style.display = 'none';
-	document.getElementById('webcam-container').style.display = 'block';
+	$('#webcam-container').show();
+	$('#canvas').hide();
+	$('#label-container').show();
 
 	maxPredictions = model.getTotalClasses();
 
@@ -14,11 +15,11 @@ async function initImg() {
 	const flip = true; // whether to flip the webcam
 	webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
 	await webcam.setup(); // request access to the webcam
+	$('#startButton').hide();
 	await webcam.play();
 	window.requestAnimationFrame(imgLoop);
 
 	// append elements to the DOM
-	// document.getElementById('webcam-container').innerHTML = camera;
 	let cameraContainer = document.getElementById('webcam-container');
 	if (cameraContainer.hasChildNodes()) {
 		cameraContainer.removeChild(cameraContainer.firstChild);
@@ -53,7 +54,7 @@ async function ImgPredict() {
 		labelContainer.childNodes[i].innerHTML = classPrediction;
 
 		if (prediction[i].probability.toFixed(2) > 0.94) {
-			serialSubmit(classPrediction);
+			serialSubmit(prediction[i].className);
 			found = true;
 		}
 	}

@@ -25,7 +25,7 @@ requestPortButton.onclick = async (event) => {
 			// filters: [{ usbVendorId: 0x0d28, usbProductId: 0x0204 }]
 		});
 		console.log(port);
-		document.getElementById('connectPort').style.display = 'block';
+		$('#connectPort').show();
 	} catch (error) {
 		console.log(error);
 	} finally {
@@ -38,7 +38,7 @@ async function openPort() {
 		await port.open({ baudRate: 9600 });
 		// console.log(port);
 		open = true;
-		document.getElementById('openPort').style.display = 'block';
+		$('#openPort').show();
 		console.log('Port connected to Microbit');
 	} else {
 		console.log('Port already open...');
@@ -72,6 +72,29 @@ readButton.onclick = async (event) => {
 	}
 };
 
+async function read() {
+	// reader = port.readable.getReader();
+
+	const textDecoder = new TextDecoderStream();
+	readableStreamClosed = port.readable.pipeTo(textDecoder.writable);
+	// textReader = textDecoder.readable.getReader();
+	reader = textDecoder.readable.pipeThrough(new TransformStream(new LineBreakTransformer())).getReader();
+	console.log('Reader Connected');
+	reading = true;
+
+	while (true) {
+		const { value, done } = await reader.read();
+		if (done) {
+			reader.releaseLock();
+			reading = false;
+			break;
+		}
+		if (value) {
+			console.log(value);
+		}
+	}
+}
+
 testButton.onclick = async (event) => {
 	// writer = port.writable.getWriter();
 	// const data = new Uint8Array([116, 114, 117, 101, 10]); // "true\n"
@@ -85,7 +108,7 @@ testButton.onclick = async (event) => {
 		writer = textEncoder.writable.getWriter();
 		writing = true;
 	}
-	await writer.write('test\n');
+	await writer.write('test');
 };
 
 async function writeToSerial(value) {
@@ -93,6 +116,8 @@ async function writeToSerial(value) {
 	// const data = new Uint8Array([116, 114, 117, 101, 10]); // "true\n"
 	// await writer.write(data);
 	// writer.releaseLock();
+	$('#startButton').removeClass('loading');
+	$('#startButton').text('Start!');
 
 	if (!writer) {
 		const textEncoder = new TextEncoderStream();
@@ -101,7 +126,7 @@ async function writeToSerial(value) {
 		writer = textEncoder.writable.getWriter();
 		writing = true;
 	}
-	await writer.write(value + '\n');
+	await writer.write(value);
 }
 
 closeButton.onclick = (event) => {
@@ -134,7 +159,7 @@ async function closePort() {
 			console.log(error);
 		} finally {
 			await port.close();
-			document.getElementById('openPort').style.display = 'none';
+			$('#openPort').hide();
 			console.log('Port disconnected from Microbit');
 			open = false;
 		}

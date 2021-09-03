@@ -1,7 +1,7 @@
 $(document).ready(function () {
 	(() => {
 		if (port) {
-			document.getElementById('connectPort').style.display = 'block';
+			$('#connectPort').show();
 		}
 	})();
 });
@@ -13,8 +13,22 @@ $(document).ready(function () {
 
 let model, webcam, labelContainer, maxPredictions, ctx, found;
 
-submitUrl.onclick = (event) => {
+function submitUrl() {
 	if (validURL(teachableUrl.value)) {
+		$('#webcam-container').hide();
+		$('#canvas').hide();
+		$('#label-container').hide();
+		$('#startButton').show();
+	} else {
+		alert('invalid URL');
+	}
+}
+
+startButton.onclick = () => {
+	if (validURL(teachableUrl.value)) {
+		$('#startButton').addClass('disabled');
+		$('#startButton').text('Loading');
+		$('#startButton').addClass('loading');
 		found = false;
 		openPort();
 		chooseModel(teachableUrl.value);

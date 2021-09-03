@@ -8,8 +8,9 @@ let poseArr = [];
 let poseSensitivity = 50;
 
 async function initPose() {
-	document.getElementById('webcam-container').style.display = 'none';
-	document.getElementById('canvas').style.display = 'block';
+	$('#webcam-container').hide();
+	$('#canvas').show();
+	$('#label-container').show();
 
 	maxPredictions = model.getTotalClasses();
 	poseArr = new Array(maxPredictions);
@@ -20,6 +21,7 @@ async function initPose() {
 	const flip = true; // whether to flip the webcam
 	webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
 	await webcam.setup(); // request access to the webcam
+	$('#startButton').hide();
 	await webcam.play();
 	window.requestAnimationFrame(poseLoop);
 
@@ -38,17 +40,20 @@ async function initPose() {
 async function poseLoop(timestamp) {
 	if (!found) {
 		webcam.update(); // update the webcam frame
-		let i = await posePredict();
-		if (i || i === 0) poseArr[i]++;
-		if (poseArr[i] > poseSensitivity) found = true;
+		let foundPrediction = await posePredict();
+		if (foundPrediction.foundI || foundPrediction.foundI === 0) poseArr[foundPrediction.foundI]++;
+		if (poseArr[foundPrediction.foundI] > poseSensitivity) {
+			found = true;
+			serialSubmit(foundPrediction.className);
+			return;
+		}
 		window.requestAnimationFrame(poseLoop);
-	} else {
-		serialSubmit(1);
 	}
 }
 
 async function posePredict() {
 	let foundI;
+	let className;
 	let classPrediction;
 	// Prediction #1: run input through posenet
 	// estimatePose can take in an image, video or canvas html element
@@ -60,14 +65,14 @@ async function posePredict() {
 		classPrediction = prediction[i].className + ': ' + prediction[i].probability.toFixed(2);
 		labelContainer.childNodes[i].innerHTML = classPrediction;
 		if (prediction[i].probability.toFixed(2) > 0.99) {
-			serialSubmit(classPrediction);
 			foundI = i;
+			className = prediction[i].className;
 		}
 	}
 
 	// finally draw the poses
 	drawPose(pose);
-	return foundI;
+	return { foundI: foundI, className: className };
 }
 
 function drawPose(pose) {
