@@ -5,17 +5,18 @@
 
 // Load the image model and setup the webcam
 async function initImg() {
-	$('#webcam-container').show();
-	$('#canvas').hide();
-	$('#label-container').show();
-
 	maxPredictions = model.getTotalClasses();
 
 	// Convenience function to setup a webcam
 	const flip = true; // whether to flip the webcam
-	webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
+	webcam = new tmImage.Webcam(500, 500, flip); // width, height, flip
 	await webcam.setup(); // request access to the webcam
-	$('#startButton').hide();
+	$('#startButton').fadeOut(() => {
+		$('#canvas').hide(() => {
+			$('#webcam-container').show();
+			$('#label-container').fadeIn();
+		});
+	});
 	await webcam.play();
 	window.requestAnimationFrame(imgLoop);
 

@@ -7,7 +7,7 @@ let readableStreamClosed;
 let writer;
 let writableStreamClosed;
 
-console.log(`("serial" in navigator): ${'serial' in navigator}`);
+// console.log(`("serial" in navigator): ${'serial' in navigator}`);
 
 navigator.serial.getPorts().then(async (ports) => {
 	if (ports.length == 0) {
@@ -15,7 +15,7 @@ navigator.serial.getPorts().then(async (ports) => {
 		return;
 	}
 	port = ports[0];
-	console.log(port);
+	// console.log(port);
 });
 
 requestPortButton.onclick = async (event) => {
@@ -25,7 +25,7 @@ requestPortButton.onclick = async (event) => {
 			// filters: [{ usbVendorId: 0x0d28, usbProductId: 0x0204 }]
 		});
 		console.log(port);
-		$('#connectPort').show();
+		changePage(true);
 	} catch (error) {
 		console.log(error);
 	} finally {
@@ -45,6 +45,7 @@ async function openPort() {
 	}
 }
 
+/* Start: Future Development and Testing
 openPortButton.onclick = (event) => {
 	openPort();
 };
@@ -111,24 +112,6 @@ testButton.onclick = async (event) => {
 	await writer.write('test');
 };
 
-async function writeToSerial(value) {
-	// writer = port.writable.getWriter();
-	// const data = new Uint8Array([116, 114, 117, 101, 10]); // "true\n"
-	// await writer.write(data);
-	// writer.releaseLock();
-	$('#startButton').removeClass('loading');
-	$('#startButton').text('Start!');
-
-	if (!writer) {
-		const textEncoder = new TextEncoderStream();
-		writableStreamClosed = textEncoder.readable.pipeTo(port.writable);
-
-		writer = textEncoder.writable.getWriter();
-		writing = true;
-	}
-	await writer.write(value);
-}
-
 closeButton.onclick = (event) => {
 	closePort();
 };
@@ -166,6 +149,28 @@ async function closePort() {
 	} else {
 		console.log('Port already closed...');
 	}
+}
+
+End: Future Development and Testing */
+
+async function writeToSerial(value) {
+	// writer = port.writable.getWriter();
+	// const data = new Uint8Array([116, 114, 117, 101, 10]); // "true\n"
+	// await writer.write(data);
+	// writer.releaseLock();
+
+	$('#startButton').removeClass('disabled');
+	$('#startButton').removeClass('loading');
+	$('#startButton').text('Start!');
+
+	if (!writer) {
+		const textEncoder = new TextEncoderStream();
+		writableStreamClosed = textEncoder.readable.pipeTo(port.writable);
+
+		writer = textEncoder.writable.getWriter();
+		writing = true;
+	}
+	await writer.write(value);
 }
 
 navigator.serial.addEventListener('connect', async (event) => {

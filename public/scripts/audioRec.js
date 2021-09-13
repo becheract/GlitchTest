@@ -19,17 +19,20 @@ async function createModel(checkpointURL, metadataURL) {
 }
 
 async function initAudio(modelURL, metadataURL) {
-	$('#webcam-container').hide();
-	$('#canvas').hide();
-	$('#label-container').show();
-
 	const recognizer = await createModel(modelURL, metadataURL);
 	const classLabels = recognizer.wordLabels(); // get class labels
 	const labelContainer = document.getElementById('label-container');
-	$('#startButton').hide();
+
 	for (let i = 0; i < classLabels.length; i++) {
 		labelContainer.appendChild(document.createElement('div'));
 	}
+	$('#startButton').fadeOut(() => {
+		$('#webcam-container').hide(() => {
+			$('#audio-container').fadeIn();
+			$('#canvas').hide();
+		});
+		$('#label-container').fadeIn();
+	});
 
 	// listen() takes two arguments:
 	// 1. A callback function that is invoked anytime a word is recognized.
