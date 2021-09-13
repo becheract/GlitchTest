@@ -49,7 +49,6 @@ async function ImgPredict() {
 	// predict can take in an image, video or canvas html element
 	const prediction = await model.predict(webcam.canvas);
 
-	//test
 	for (let i = 0; i < maxPredictions; i++) {
 		const classPrediction = prediction[i].className + ': ' + prediction[i].probability.toFixed(2);
 		labelContainer.childNodes[i].innerHTML = classPrediction;
@@ -59,8 +58,4 @@ async function ImgPredict() {
 			found = true;
 		}
 	}
-	// for (let i = 0; i < maxPredictions; i++) {
-	// 	const classPrediction = prediction[i].className + ': ' + prediction[i].probability.toFixed(2);
-	// 	labelContainer.childNodes[i].innerHTML = classPrediction;
-	// }
 }

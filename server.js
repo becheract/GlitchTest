@@ -1,3 +1,4 @@
+const { time } = require('console');
 const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
@@ -11,7 +12,7 @@ const path = require('path');
 if (process.env.NODE_ENV !== 'production') {
 	require('dotenv').config();
 }
-const timeStamps = [];
+let timeStamps = [];
 let idList = [];
 
 app.use('/static', express.static(path.join(__dirname, 'public')));
@@ -36,50 +37,62 @@ function validURL(str) {
 }
 
 function spamCheck(id) {
-	let count = 0;
-	const maxNum = 3;
-	const maxInterval = 10;
-	const foundDiff = 100000;
-	let idxFoundId = arrContains(timeStamps, id.split('*')[1], '*', 1);
-	console.log(idxFoundId);
-	console.log(timeStamps);
-	if (idxFoundId) {
-		count++;
-		let foundId = idxFoundId.split('*')[0];
-		let foundInterval = Date.now() - Number(foundId);
-
-		console.log(foundId); //test
-		console.log(foundInterval); //test
-		// if (foundInterval < maxInterval || count > maxNum) {
-		// 	console.log(count > maxNum);
-		// 	console.log(!arrContains(idList, id));
-		// 	console.log(idList);
-		// 	console.log(foundInterval < foundDiff);
-		// 	if (count > maxNum && !arrContains(idList, id) && foundInterval < foundDiff) {
-		// 		idList.push(id);
-		// 		console.log(idList); //test
-		// 	}
-		// 	return false;
-		// }
+	const maxInterval = 100;
+	let foundId = arrContains(timeStamps, id, '*', 1);
+	if (foundId) {
+		let foundInterval = Date.now() - Number(timeStamps[foundId].split('*')[0]);
+		if (foundInterval < maxInterval) {
+			return false;
+		}
 	}
 	timeStamps.push(`${Date.now()}*${id}`);
 	return true;
 }
 
-function arrContains(arr, obj, split, splitNum, start) {
-	for (var i = start || 0, j = arr.length; i < j; i++) {
+function arrContains(arr, obj, split, splitNum, del, start) {
+	let found = false;
+	if (arr.length > 0) {
 		if (split) {
-			if (arr[i].split(split)[splitNum] === obj) {
-				console.log(arr[i].split(split)[splitNum]);
-				return i;
+			for (var i = start || 0, j = arr.length; i < j; i++) {
+				if (arr[i].split(split)[splitNum] === obj) {
+					found = i;
+					if (del) arr.splice(i, 1);
+				}
 			}
 		} else {
-			if (arr[i] === obj) {
-				return i;
+			for (var i = start || 0, j = arr.length; i < j; i++) {
+				if (arr[i] === obj) {
+					return i;
+				}
 			}
 		}
 	}
-	return false;
+
+	return found;
+}
+
+function arrClear(arr, obj, split, splitNum, start) {
+	if (arr.length > 0) {
+		if (split) {
+			for (var i = start || 0, j = arr.length; i < j; i++) {
+				if (arr[i].split(split)[splitNum] === obj) {
+					arr.splice(i, 1);
+					i--;
+					j--;
+				}
+			}
+		} else {
+			for (var i = start || 0, j = arr.length; i < j; i++) {
+				if (arr[i] === obj) {
+					arr.splice(i, 1);
+					i--;
+					j--;
+				}
+			}
+		}
+	}
+
+	return arr;
 }
 
 //On connection start
@@ -88,11 +101,12 @@ io.on('connection', (socket) => {
 	socket.emit('user-id', socket.id);
 
 	socket.on('check-url', (data) => {
-		socket.emit('valid-url', spamCheck(data.socketId) && validURL(data.url));
+		let test = spamCheck(data.socketId) && validURL(data.url);
+		socket.emit('valid-url', test);
 	});
 
 	socket.on('disconnect', () => {
-		//Test - delete user id from arrays and all 0
+		timeStamps = arrClear(timeStamps, socket.id, '*', 1);
 		console.log(`User ${socket.id} disconnected`);
 	});
 });
