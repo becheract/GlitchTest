@@ -1,8 +1,8 @@
 let model, webcam, labelContainer, maxPredictions, ctx, found, modelName, socketId;
 let pageNumber = 1;
 
-// const socket = io();
-const socket = io('http://localhost:8080');
+const socket = io();
+// const socket = io('http://localhost:8080');
 
 socket.on('user-id', (userId) => {
 	console.log('Connected with id: ' + userId);
