@@ -24,7 +24,7 @@ async function initAudio(modelURL, metadataURL) {
 	const labelContainer = document.getElementById('label-container');
 
 	for (let i = 0; i < classLabels.length; i++) {
-		labelContainer.appendChild(document.createElement('div'));
+		$('#label-container').append(`<div class='meter'><p class='label'></p><span class='meter-container'><span><p></p></span></span></div>`);
 	}
 	$('#startButton').fadeOut(() => {
 		$('#webcam-container').hide(() => {
@@ -42,9 +42,9 @@ async function initAudio(modelURL, metadataURL) {
 			const scores = result.scores; // probability of prediction for each class
 			// render the probability scores per class
 			for (let i = 0; i < classLabels.length; i++) {
-				const classPrediction = classLabels[i] + ': ' + result.scores[i].toFixed(2);
-				labelContainer.childNodes[i].innerHTML = classPrediction;
-
+				labelContainer.childNodes[i].firstChild.innerHTML = classLabels[i];
+				labelContainer.childNodes[i].childNodes[1].firstChild.style.width = `${Math.floor(result.scores[i] * 100)}%`;
+				labelContainer.childNodes[i].childNodes[1].firstChild.firstChild.innerHTML = `${Math.floor(result.scores[i] * 100)}%`;
 				if (result.scores[i].toFixed(2) > 0.9 && classLabels[i] !== 'Background Noise') {
 					serialSubmit(classLabels[i]);
 				}

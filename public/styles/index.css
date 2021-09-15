@@ -7,13 +7,18 @@ body {
 
 h1 {
   font-size: 4rem;
+  color: #000;
 }
 
 h2 {
   font-size: 1.9rem;
 }
 
-button {
+p {
+  max-width: none;
+}
+
+button:not(.glitchButton) {
   border: 2px solid #000000;
   height: -webkit-fit-content;
   height: -moz-fit-content;
@@ -29,11 +34,11 @@ button {
   transition: all 0.2s ease, background-color 0.5s ease;
 }
 
-button:hover {
+button:not(.glitchButton):hover {
   background-color: #037f51;
 }
 
-button:active {
+button:not(.glitchButton):active {
   background-color: #106b5a;
   margin: 20px 20px 0px 0;
   -webkit-box-shadow: 0 0 0 #fff;
@@ -420,15 +425,67 @@ button:active {
 #page-4 #results #label-container div:nth-of-type(even) {
   background-color: #fff;
   color: #000;
-  padding: 10px 40px;
-  text-transform: uppercase;
 }
 
 #page-4 #results #label-container div:nth-of-type(odd) {
   background-color: #000;
   color: #fff;
-  padding: 10px 40px;
+}
+
+#page-4 #results #label-container .meter {
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
   text-transform: uppercase;
+  height: 20px;
+  /* Can be anything */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  padding: 10px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+#page-4 #results #label-container .meter .meter-container {
+  width: 50%;
+  background-color: #d5e6da;
+  border-radius: 4px;
+}
+
+#page-4 #results #label-container .meter .meter-container span {
+  height: 25px;
+  border-radius: 4px;
+  background-color: #2bc253;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transition: width 0.35s ease-in-out;
+  transition: width 0.35s ease-in-out;
+}
+
+#page-4 #results #label-container .meter .meter-container span p {
+  width: 100%;
+  color: #000;
+}
+
+#page-4 #results #label-container .meter .label,
+#page-4 #results #label-container .meter p {
+  margin: 0 10px;
+  width: 40%;
+}
+
+#page-4 #results #label-container .meter .label {
+  word-wrap: break-word;
 }
 
 @keyframes ellipsis {

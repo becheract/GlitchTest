@@ -30,9 +30,10 @@ async function initImg() {
 	}
 
 	labelContainer = document.getElementById('label-container');
+
 	for (let i = 0; i < maxPredictions; i++) {
 		// and class labels
-		labelContainer.appendChild(document.createElement('div'));
+		$('#label-container').append(`<div class='meter'><p class='label'></p><span class='meter-container'><span><p></p></span></span></div>`);
 	}
 }
 
@@ -50,8 +51,9 @@ async function ImgPredict() {
 	const prediction = await model.predict(webcam.canvas);
 
 	for (let i = 0; i < maxPredictions; i++) {
-		const classPrediction = prediction[i].className + ': ' + prediction[i].probability.toFixed(2);
-		labelContainer.childNodes[i].innerHTML = classPrediction;
+		labelContainer.childNodes[i].firstChild.innerHTML = prediction[i].className;
+		labelContainer.childNodes[i].childNodes[1].firstChild.style.width = `${Math.floor(prediction[i].probability * 100)}%`;
+		labelContainer.childNodes[i].childNodes[1].firstChild.firstChild.innerHTML = `${Math.floor(prediction[i].probability * 100)}%`;
 
 		if (prediction[i].probability.toFixed(2) > 0.94) {
 			serialSubmit(prediction[i].className);
