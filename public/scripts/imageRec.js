@@ -3,9 +3,14 @@
 
 // the link to your model provided by Teachable Machine export panel
 
+let imgArr = [];
+let imgSensitivity = 20;
+
 // Load the image model and setup the webcam
 async function initImg() {
 	maxPredictions = model.getTotalClasses();
+	let classLabels = model.getClassLabels();
+	imgArr = new Array(maxPredictions);
 
 	// Convenience function to setup a webcam
 	const flip = true; // whether to flip the webcam
@@ -32,21 +37,43 @@ async function initImg() {
 	labelContainer = document.getElementById('label-container');
 
 	for (let i = 0; i < maxPredictions; i++) {
-		// and class labels
-		$('#label-container').append(`<div class='meter'><p class='label'></p><span class='meter-container'><span><p></p></span></span></div>`);
+		$('#label-container').append(
+			`<div class='meter' id="${classLabels[i]}"><p class='label'></p><span class='meter-container'><span><p></p></span></span><span class='toggle-container'><label class="switch"><input type="checkbox" class="toggle-switch" checked><span class="slider round"></span></label></span></div>`
+		);
+		imgArr[i] = 0;
 	}
 }
 
 async function imgLoop() {
-	if (!found) {
+	if (!found.bool || found.continous) {
+		let ignoredClass = false;
+
 		webcam.update(); // update the webcam frame
-		await ImgPredict();
+		let foundPrediction = await ImgPredict();
+		if (foundPrediction.foundI || foundPrediction.foundI === 0) imgArr[foundPrediction.foundI]++;
+		if (imgArr[foundPrediction.foundI] > imgSensitivity) {
+			for (let j = 0; j < ignoredClasses.length; j++) {
+				if (ignoredClasses[j] === foundPrediction.className) {
+					ignoredClass = true;
+				}
+			}
+			if (!ignoredClass) {
+				found.bool = true;
+				for (let i = 0; i < imgArr.length; ++i) imgArr[i] = 0;
+				serialSubmit(foundPrediction.className);
+			} else {
+				imgArr[foundPrediction.foundI] = 0;
+				ignoredClass = false;
+			}
+		}
 		window.requestAnimationFrame(imgLoop);
 	}
 }
 
 // run the webcam image through the image model
 async function ImgPredict() {
+	let foundI;
+	let className;
 	// predict can take in an image, video or canvas html element
 	const prediction = await model.predict(webcam.canvas);
 
@@ -56,8 +83,9 @@ async function ImgPredict() {
 		labelContainer.childNodes[i].childNodes[1].firstChild.firstChild.innerHTML = `${Math.floor(prediction[i].probability * 100)}%`;
 
 		if (prediction[i].probability.toFixed(2) > 0.94) {
-			serialSubmit(prediction[i].className);
-			found = true;
+			foundI = i;
+			className = prediction[i].className;
 		}
 	}
+	return { foundI: foundI, className: className };
 }

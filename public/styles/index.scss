@@ -9,7 +9,7 @@ body {
 
 h1 {
 	font-size: 4rem;
-	color: #000;
+	color: #000 !important;
 }
 
 h2 {
@@ -17,10 +17,10 @@ h2 {
 }
 
 p {
-	max-width: none;
+	max-width: none !important;
 }
 
-button:not(.glitchButton) {
+button:not(.glitchButtonElement, .buttonLinks) {
 	border: 2px solid #000000;
 	height: fit-content;
 	padding: 10px;
@@ -302,6 +302,85 @@ button:not(.glitchButton) {
 				}
 			}
 		}
+
+		.toggle-container {
+			width: fit-content;
+			margin: 0 10px;
+		}
+
+		#contContainer {
+			display: flex;
+			width: 100%;
+			align-items: center;
+			justify-content: center;
+
+			h3 {
+				margin: 0 30px;
+				min-width: 50%;
+			}
+		}
+
+		#contContainer,
+		.toggle-container {
+			.switch {
+				position: relative;
+				display: inline-block;
+				width: 60px;
+				height: 34px;
+
+				input {
+					opacity: 0;
+					width: 0;
+					height: 0;
+				}
+
+				.slider {
+					position: absolute;
+					cursor: pointer;
+					top: 0;
+					left: 0;
+					right: 0;
+					bottom: 0;
+					background-color: #ccc;
+					-webkit-transition: 0.4s;
+					transition: 0.4s;
+
+					&::before {
+						position: absolute;
+						content: '';
+						height: 26px;
+						width: 26px;
+						left: 4px;
+						bottom: 4px;
+						background-color: white;
+						-webkit-transition: 0.4s;
+						transition: 0.4s;
+					}
+				}
+
+				input:checked + .slider {
+					background-color: #2196f3;
+				}
+
+				input:focus + .slider {
+					box-shadow: 0 0 1px #2196f3;
+				}
+
+				input:checked + .slider:before {
+					-webkit-transform: translateX(26px);
+					-ms-transform: translateX(26px);
+					transform: translateX(26px);
+				}
+
+				.slider.round {
+					border-radius: 34px;
+				}
+
+				.slider.round:before {
+					border-radius: 50%;
+				}
+			}
+		}
 	}
 
 	.loading {
@@ -333,6 +412,7 @@ button:not(.glitchButton) {
 		border-radius: 50px;
 		padding: 20px 0 40px;
 		height: 100vh;
+
 		h2 {
 			margin: 10px 40px;
 		}

@@ -1,5 +1,10 @@
-let model, webcam, labelContainer, maxPredictions, ctx, found, modelName, socketId;
+let model, webcam, labelContainer, maxPredictions, ctx, modelName, socketId;
 let pageNumber = 1;
+let ignoredClasses = [];
+let found = {
+	continous: false,
+	bool: false,
+};
 
 const socket = io();
 // const socket = io('http://localhost:8080');
@@ -41,14 +46,17 @@ socket.on('valid-url', (valid) => {
 
 startButton.onclick = () => {
 	$('#startButton').addClass('disabled');
+	$('#contContainer').fadeOut();
 	$('#startButton').text('Loading');
 	$('#startButton').addClass('loading');
 	$('#results').removeClass('init-hide-imp');
-	found = false;
+
+	found.bool = false;
 	openPort();
 	chooseModel(teachableUrl.value);
 };
 
+// Choose between Image, Pose or Audio model based on the URL
 async function chooseModel(URL) {
 	const modelURL = URL + 'model.json';
 	const metadataURL = URL + 'metadata.json';
@@ -72,10 +80,12 @@ async function chooseModel(URL) {
 	}
 }
 
+// Serial Submit to  Microbit
 function serialSubmit(classPrediction) {
 	writeToSerial(classPrediction);
 }
 
+// Change site page
 function changePage(direction) {
 	if (direction) {
 		if (pageNumber === 1) {
@@ -97,3 +107,26 @@ function changePage(direction) {
 		}
 	}
 }
+
+// Toggle the whether the model will be continous after detecting a class
+$('#contToggle').click(() => {
+	found.continous = !found.continous;
+	if (found.continous) {
+		contLabel.innerHTML = 'Continous';
+	} else {
+		contLabel.innerHTML = 'Discontinous';
+	}
+});
+
+$('#label-container').on('click', '.toggle-switch', function (event) {
+	event.stopPropagation();
+	event.stopImmediatePropagation();
+	let id = $(this).parents()[2].id;
+	for (let i = 0; i < ignoredClasses.length; i++) {
+		if (ignoredClasses[i] === id) {
+			ignoredClasses.splice(i, 1);
+			return;
+		}
+	}
+	ignoredClasses.push(id);
+});

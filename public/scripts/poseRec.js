@@ -5,12 +5,12 @@
 // const URL = 'https://teachablemachine.withgoogle.com/models/ElTQ9DWgI/';
 
 let poseArr = [];
-let poseSensitivity = 50;
+let poseSensitivity = 20;
 
 async function initPose() {
 	maxPredictions = model.getTotalClasses();
+	let classLabels = model.getClassLabels();
 	poseArr = new Array(maxPredictions);
-	for (let i = 0; i < maxPredictions; ++i) poseArr[i] = 0;
 
 	// Convenience function to setup a webcam
 	const size = 500;
@@ -28,8 +28,11 @@ async function initPose() {
 	ctx = canvas.getContext('2d');
 	labelContainer = document.getElementById('label-container');
 	for (let i = 0; i < maxPredictions; i++) {
-		// and class labels
-		$('#label-container').append(`<div class='meter'><p class='label'></p><span class='meter-container'><span><p></p></span></span></div>`);
+		// add class labels
+		$('#label-container').append(
+			`<div class='meter' id="${classLabels[i]}"><p class='label'></p><span class='meter-container'><span><p></p></span></span><span class='toggle-container'><label class="switch"><input type="checkbox" class="toggle-switch" checked><span class="slider round"></span></label></span></div>`
+		);
+		poseArr[i] = 0;
 	}
 	$('#webcam-container').hide(() => {
 		$('#canvas').fadeIn();
@@ -38,14 +41,27 @@ async function initPose() {
 }
 
 async function poseLoop(timestamp) {
-	if (!found) {
+	if (!found.bool || found.continous) {
+		let ignoredClass = false;
+
 		webcam.update(); // update the webcam frame
 		let foundPrediction = await posePredict();
 		if (foundPrediction.foundI || foundPrediction.foundI === 0) poseArr[foundPrediction.foundI]++;
+
 		if (poseArr[foundPrediction.foundI] > poseSensitivity) {
-			found = true;
-			serialSubmit(foundPrediction.className);
-			return;
+			for (let j = 0; j < ignoredClasses.length; j++) {
+				if (ignoredClasses[j] === foundPrediction.className) {
+					ignoredClass = true;
+				}
+			}
+			if (!ignoredClass) {
+				found.bool = true;
+				for (let i = 0; i < poseArr.length; ++i) poseArr[i] = 0;
+				serialSubmit(foundPrediction.className);
+			} else {
+				poseArr[foundPrediction.foundI] = 0;
+				ignoredClass = false;
+			}
 		}
 		window.requestAnimationFrame(poseLoop);
 	}
@@ -54,7 +70,6 @@ async function poseLoop(timestamp) {
 async function posePredict() {
 	let foundI;
 	let className;
-	let classPrediction;
 	// Prediction #1: run input through posenet
 	// estimatePose can take in an image, video or canvas html element
 	const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);

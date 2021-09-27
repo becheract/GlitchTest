@@ -4,6 +4,9 @@
 // the link to your model provided by Teachable Machine export panel
 // const URL = 'https://teachablemachine.withgoogle.com/models/RXd6aD1HY/';
 
+let audArr = [];
+let audSensitivity = 5;
+
 async function createModel(checkpointURL, metadataURL) {
 	const recognizer = speechCommands.create(
 		'BROWSER_FFT', // fourier transform type, not useful to change
@@ -22,10 +25,15 @@ async function initAudio(modelURL, metadataURL) {
 	const recognizer = await createModel(modelURL, metadataURL);
 	const classLabels = recognizer.wordLabels(); // get class labels
 	const labelContainer = document.getElementById('label-container');
+	audArr = new Array(classLabels.length);
 
 	for (let i = 0; i < classLabels.length; i++) {
-		$('#label-container').append(`<div class='meter'><p class='label'></p><span class='meter-container'><span><p></p></span></span></div>`);
+		$('#label-container').append(
+			`<div class='meter' id="${classLabels[i]}"><p class='label'></p><span class='meter-container'><span><p></p></span></span><span class='toggle-container'><label class="switch"><input type="checkbox" class="toggle-switch" checked><span class="slider round"></span></label></span></div>`
+		);
+		audArr[i] = 0;
 	}
+
 	$('#startButton').fadeOut(() => {
 		$('#webcam-container').hide(() => {
 			$('#audio-container').fadeIn();
@@ -39,14 +47,31 @@ async function initAudio(modelURL, metadataURL) {
 	// 2. A configuration object with adjustable fields
 	recognizer.listen(
 		(result) => {
-			const scores = result.scores; // probability of prediction for each class
 			// render the probability scores per class
 			for (let i = 0; i < classLabels.length; i++) {
+				let ignoredClass = false;
 				labelContainer.childNodes[i].firstChild.innerHTML = classLabels[i];
 				labelContainer.childNodes[i].childNodes[1].firstChild.style.width = `${Math.floor(result.scores[i] * 100)}%`;
 				labelContainer.childNodes[i].childNodes[1].firstChild.firstChild.innerHTML = `${Math.floor(result.scores[i] * 100)}%`;
-				if (result.scores[i].toFixed(2) > 0.9 && classLabels[i] !== 'Background Noise') {
-					serialSubmit(classLabels[i]);
+				if (result.scores[i].toFixed(2) > 0.9) {
+					audArr[i]++;
+					if (audArr[i] > audSensitivity) {
+						for (let j = 0; j < ignoredClasses.length; j++) {
+							if (ignoredClasses[j] === classLabels[i]) {
+								ignoredClass = true;
+							}
+						}
+						if (!ignoredClass) {
+							for (let i = 0; i < audArr.length; ++i) audArr[i] = 0;
+							if (!found.continous) {
+								recognizer.stopListening();
+							}
+							serialSubmit(classLabels[i]);
+						} else {
+							audArr[i] = 0;
+							ignoredClass = false;
+						}
+					}
 				}
 			}
 		},
