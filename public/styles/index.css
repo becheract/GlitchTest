@@ -35,7 +35,7 @@ button:not(.glitchButtonElement, .buttonLinks) {
 }
 
 button:hover {
-  background-color: #037f51;
+  background-color: #037f51 !important;
 }
 
 button:active {
