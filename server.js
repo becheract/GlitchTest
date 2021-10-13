@@ -13,7 +13,6 @@ if (process.env.NODE_ENV !== 'production') {
 	require('dotenv').config();
 }
 let timeStamps = [];
-let idList = [];
 
 app.use('/static', express.static(path.join(__dirname, 'public')));
 

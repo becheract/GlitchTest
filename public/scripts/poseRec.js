@@ -81,7 +81,7 @@ async function posePredict() {
 		labelContainer.childNodes[i].childNodes[1].firstChild.style.width = `${Math.floor(prediction[i].probability * 100)}%`;
 		labelContainer.childNodes[i].childNodes[1].firstChild.firstChild.innerHTML = `${Math.floor(prediction[i].probability * 100)}%`;
 
-		if (prediction[i].probability.toFixed(2) > 0.99) {
+		if (prediction[i].probability.toFixed(2) > 0.95) {
 			foundI = i;
 			className = prediction[i].className;
 		}

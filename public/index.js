@@ -6,8 +6,8 @@ let found = {
 	bool: false,
 };
 
-const socket = io();
-// const socket = io('http://localhost:8080');
+// const socket = io();
+const socket = io('http://localhost:8080');
 
 socket.on('user-id', (userId) => {
 	console.log('Connected with id: ' + userId);
@@ -18,18 +18,12 @@ socket.on('disconnect', () => {
 	console.log(`User disconnected`);
 });
 
-function pickModel(model) {
-	modelName = model;
-	changePage(true);
-}
-
 submitUrl.onclick = () => {
 	socket.emit('check-url', { url: teachableUrl.value, socketId: socketId });
 };
 
 socket.on('valid-url', (valid) => {
 	if (valid) {
-		$('.nav').addClass('init-hide-imp');
 		$('#webcam-container').fadeOut(() => {
 			$('#canvas').fadeOut();
 			$('#label-container').fadeOut();
@@ -68,11 +62,15 @@ async function chooseModel(URL) {
 	// Note: the pose library adds a tmPose object to your window (window.tmPose)
 	model = await tmImage.load(modelURL, metadataURL);
 	let metaName = model._metadata.modelName;
+	$('.undercard').fadeIn();
 	if (metaName === 'tm-my-image-model') {
+		$('.projectName').text('IMAGE MODEL');
 		initImg();
 	} else if (metaName === 'TMv2') {
+		$('.projectName').text('AUDIO MODEL');
 		initAudio(modelURL, metadataURL);
 	} else if (metaName === 'my-pose-model') {
+		$('.projectName').text('POSE MODEL');
 		model = await tmPose.load(modelURL, metadataURL);
 		initPose();
 	} else {
@@ -88,23 +86,12 @@ function serialSubmit(classPrediction) {
 // Change site page
 function changePage(direction) {
 	if (direction) {
-		if (pageNumber === 1) {
-			setTimeout(function () {
-				$(`#page-${pageNumber}`).fadeOut('fast', function () {
-					$('.nav').removeClass('init-hide-imp');
-					$('.projectName').text(modelName);
-					pageNumber++;
-					$(`#page-${pageNumber}`).fadeIn('slow');
-				});
-			}, 100);
-		} else {
-			setTimeout(function () {
-				$(`#page-${pageNumber}`).fadeOut('fast', function () {
-					pageNumber++;
-					$(`#page-${pageNumber}`).fadeIn('slow');
-				});
-			}, 100);
-		}
+		setTimeout(function () {
+			$(`#page-${pageNumber}`).fadeOut('fast', function () {
+				pageNumber++;
+				$(`#page-${pageNumber}`).fadeIn('slow');
+			});
+		}, 100);
 	}
 }
 
@@ -112,7 +99,7 @@ function changePage(direction) {
 $('#contToggle').click(() => {
 	found.continous = !found.continous;
 	if (found.continous) {
-		contLabel.innerHTML = 'Continous';
+		contLabel.innerHTML = 'Nonstop';
 	} else {
 		contLabel.innerHTML = 'Discontinous';
 	}
