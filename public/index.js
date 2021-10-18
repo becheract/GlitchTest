@@ -10,8 +10,8 @@ let heldClasses = [];
 let continous = true;
 let lastDetection = '';
 
-// const socket = io();
-const socket = io('http://localhost:8080');
+const socket = io();
+// const socket = io('http://localhost:8080');
 
 socket.on('user-id', (userId) => {
 	console.log('Connected with id: ' + userId);
