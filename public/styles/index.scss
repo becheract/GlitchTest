@@ -1,8 +1,11 @@
 /* End: Variables */
 
 /* Standard Elements: Start */
+html,
 body {
+	height: 100%;
 	font-family: 'Karla', sans-serif;
+	margin: 0;
 }
 
 h1 {
@@ -93,29 +96,41 @@ button:not(.glitchButtonElement, .buttonLinks) {
 #page {
 	&-1,
 	&-2 {
-		margin: 3em 2em 2em;
+		padding: 3em 2em 2em;
 	}
 	&-3 {
-		margin: 1em;
+		padding: 1em;
 	}
 }
 /* Document Wide: End */
 
 /* Page One: Start*/
 #page-1 {
-	text-align: center;
+	background-color: #faaf3f;
+	width: 100%;
+	box-sizing: border-box;
+	a {
+		text-decoration: none;
+	}
+
+	.sub-title {
+		text-align: left;
+		margin: 0;
+	}
 
 	.title {
 		text-transform: uppercase;
-		text-shadow: 5px 5px #c9c6c6;
+		text-shadow: 3px 3px #fff;
 		font-size: 5.5rem;
 		text-align: left;
-		margin: 0 0 30px;
+		margin: 0px 0 60px;
 	}
 
-	p {
+	.paragraph {
 		text-align: left;
 		margin: 0;
+		font-weight: 600;
+		font-size: 1.1rem;
 	}
 
 	.page-container {
@@ -127,13 +142,6 @@ button:not(.glitchButtonElement, .buttonLinks) {
 			padding: 0 50px;
 			display: flex;
 			flex-direction: column;
-
-			.paragraph {
-				text-align: left;
-				margin: 0;
-				font-weight: 600;
-				font-size: 1.1rem;
-			}
 
 			.btn-container {
 				display: flex;
@@ -149,7 +157,7 @@ button:not(.glitchButtonElement, .buttonLinks) {
 					align-self: center;
 
 					h1 {
-						font-size: 2rem;
+						font-size: 1.5rem;
 					}
 
 					&:active {
@@ -169,12 +177,54 @@ button:not(.glitchButtonElement, .buttonLinks) {
 		.img-sctn {
 			width: 45%;
 		}
+		.microbit-img {
+			position: absolute;
+			top: -30px;
+			right: 0;
+			width: 40%;
+		}
 	}
-}
 
-@keyframes hueRotation {
-	to {
-		filter: hue-rotate(360deg);
+	.page-bottom {
+		background-color: #fff;
+		padding: 55px;
+		border-radius: 38px;
+		border: 2px solid #000;
+		margin: 80px 0;
+		display: flex;
+		justify-content: space-around;
+
+		span {
+			width: 25%;
+			.btn-cont {
+				button {
+					width: 100%;
+					padding: 10px 17px;
+					border-radius: 100px;
+					border: 2px solid #000;
+					overflow: hidden;
+					box-shadow: -4px 4px 0px 2px #000;
+					align-self: center;
+
+					&:active {
+						margin: 14px 0 0 0;
+						box-shadow: 0 0 0 #fff;
+						border: 5px solid #000;
+					}
+				}
+			}
+			.des-title {
+				min-height: 70px;
+			}
+
+			.description {
+				margin: 30px 0;
+			}
+
+			.main-des {
+				min-height: 150px;
+			}
+		}
 	}
 }
 /* Page One: End*/
@@ -293,19 +343,6 @@ button:not(.glitchButtonElement, .buttonLinks) {
 			margin: 0 10px;
 		}
 
-		#contContainer {
-			display: flex;
-			width: 100%;
-			align-items: center;
-			justify-content: center;
-
-			h3 {
-				margin: 0 30px;
-				min-width: 50%;
-			}
-		}
-
-		#contContainer,
 		.toggle-container {
 			.switch {
 				position: relative;
@@ -474,7 +511,6 @@ button:not(.glitchButtonElement, .buttonLinks) {
 /* Mobile: Start*/
 @media only screen and (max-width: 1440px) {
 	#page-1 {
-		margin: 54px 2em 2em;
 		.title {
 			font-size: 4.5rem;
 			margin: 0 0 30px;

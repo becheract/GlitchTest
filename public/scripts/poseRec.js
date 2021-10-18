@@ -5,7 +5,7 @@
 // const URL = 'https://teachablemachine.withgoogle.com/models/ElTQ9DWgI/';
 
 let poseArr = [];
-let poseSensitivity = 20;
+let poseSensitivity = 15;
 
 async function initPose() {
 	maxPredictions = model.getTotalClasses();
@@ -30,7 +30,7 @@ async function initPose() {
 	for (let i = 0; i < maxPredictions; i++) {
 		// add class labels
 		$('#label-container').append(
-			`<div class='meter' id="${classLabels[i]}"><p class='label'></p><span class='meter-container'><span><p></p></span></span><span class='toggle-container'><label class="switch"><input type="checkbox" class="toggle-switch" checked><span class="slider round"></span></label></span></div>`
+			`<div class='meter' id="${classLabels[i]}"><p class='label'></p><span class='meter-container'><span><p></p></span></span><span class='toggle-container'><label class="switch"><input type="checkbox" class="toggle-switch" ><span class="slider round"></span></label></span></div>`
 		);
 		poseArr[i] = 0;
 	}
@@ -41,30 +41,31 @@ async function initPose() {
 }
 
 async function poseLoop(timestamp) {
-	if (!found.bool || found.continous) {
-		let ignoredClass = false;
+	if (continous) {
+		if (!continous && heldClasses.length > 0) continous = false;
 
 		webcam.update(); // update the webcam frame
 		let foundPrediction = await posePredict();
 		if (foundPrediction.foundI || foundPrediction.foundI === 0) poseArr[foundPrediction.foundI]++;
 
 		if (poseArr[foundPrediction.foundI] > poseSensitivity) {
-			for (let j = 0; j < ignoredClasses.length; j++) {
-				if (ignoredClasses[j] === foundPrediction.className) {
-					ignoredClass = true;
+			for (let j = 0; j < heldClasses.length; j++) {
+				if (heldClasses[j] === foundPrediction.className) {
+					continous = false;
 				}
 			}
-			if (!ignoredClass) {
-				found.bool = true;
+			console.log(lastDetection);
+			if (foundPrediction.className !== lastDetection) {
 				for (let i = 0; i < poseArr.length; ++i) poseArr[i] = 0;
+				lastDetection = foundPrediction.className;
 				serialSubmit(foundPrediction.className);
 			} else {
 				poseArr[foundPrediction.foundI] = 0;
 				ignoredClass = false;
 			}
 		}
-		window.requestAnimationFrame(poseLoop);
 	}
+	window.requestAnimationFrame(poseLoop);
 }
 
 async function posePredict() {

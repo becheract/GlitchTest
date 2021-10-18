@@ -26,26 +26,10 @@
 					<p class="sub-title">Welcome to the</p>
 					<h1 class="title">Robot inventions Ai Judge</h1>
 					<p class="paragraph">
-						This site will allow you to connect your Teachable Machine AI projects with a Micro:bit
-						microcontroller to shape your projects in new and exciting ways.
-						<br /><br />
-						This site will help us bridge the gap between the Teachable Machine AI and our Micro:bit giving
-						you a clever new way to shape your project. Train an AI to make a prediction using a library of
-						data you give it. Code your micro bit to use those predictions to activate motors, lights, and
-						more! Simply click on <em>"Pair Button"</em> and follow the steps to connect your Micro:bit, and
-						we’ll get that AI to control our inventions in no time at all.
-						<br /><br />
-						If you’re arriving here first, visit <a href="https://teachablemachine.withgoogle.com/">Google’s
-							Teachable Machine</a> website to create your own Machine Learning project in 3 simple steps
-						- No experience required! Teach an AI to recognize and classify audio or image data, and it can
-						tell you its prediction. The more information it has to learn from, the smarter and more
-						efficient it will be.
-						<br /><br />
-						‘Robot Inventors’ is also a book! Create and challenge yourself with 8 quick projects that will
-						teach cardboard construction, electronics, and coding with a Micro:bit microcontroller. All of
-						these projects conclude on this website, allowing you to bring your creations to life with the
-						Teachable Machine project you created. Visit <mark>________</mark> to find out more about this
-						book.
+						This site will help bridge the gap between the Teachable Machine AI and a micro:bit giving
+						you clever new ways to shape your projects. Train an AI to make a prediction using a library
+						of data you give it, and then code your micro bit to use those predictions to activate motors,
+						lights, and more! Simply click on "Pair Microbit" and follow the steps to get started today!
 					</p>
 					<span class="btn-container">
 						<button id="requestPortButton">
@@ -56,9 +40,77 @@
 							Psst, it might be called mbed Serial Port.
 						</p>
 					</span>
-
 				</div>
-				<div class='sctn img-sctn'><img src="static/assets/microbit.png" alt="Microbit.png"></div>
+				<div class='sctn img-sctn'></div>
+				<img src="static/assets/microbit.png" class="microbit-img" alt="Microbit.png">
+			</div>
+			<div class='page-bottom'>
+				<span>
+					<p class="paragraph des-title">
+						If you’re arriving here first, visit Google’s Teachable Machine website to create your own
+						Machine
+					</p>
+					<p class="description main-des">
+						Learning project in 3 simple steps. No experience required! Teach an AI to recognize and
+						classify audio or image data, and it can tell you its prediction. The more
+						information it has to learn from, the smarter and more efficient it will be.
+					</p>
+					<span class='btn-cont'>
+						<a href="https://teachablemachine.withgoogle.com/" target="_blank">
+							<button>
+								Google Teachable Machine
+							</button>
+						</a>
+					</span>
+					<p class="description">
+						New to Google Teachable Machine? Follow these guidelines to learn more: <a
+							href="https://teachablemachine.withgoogle.com/faq" target="_blank"><em><strong>Guide to
+									Teachable
+									Machine</strong></em></a>
+					</p>
+				</span>
+				<span>
+					<p class="paragraph  des-title">
+						Never coded a micro:bit before?
+					</p>
+					<p class="description main-des">
+						It’s simple. Visit the
+						<a href="https://makecode.microbit.org/" target="_blank">
+							<strong><em>
+									Microbit Makecode Website
+								</em></strong>
+						</a> for tons of
+						easy-to-follow lessons and projects. When you’re ready,
+						download our special code to help your micro:bit talk to
+						this website. Add the code you want and we’ll get that AI
+						to control our inventions in no time at all.
+					</p>
+					<span class='btn-cont'> <a href="https://makecode.microbit.org/48764-76919-05919-76086"
+							target="_blank"><button>Special Micro:bit
+								Makecode</button></a></span>
+					<p class="description">
+						New to Microbit Makecode? Follow these guidelines to
+						learn more: <a href="https://makecode.microbit.org/" target="_blank"><strong> <em>Microbit
+									Makecode
+									Website</em></strong></a>
+					</p>
+				</span>
+				<span>
+					<p class="paragraph  des-title">
+						‘AI Robots’ is also a book!
+					</p>
+					<p class="description main-des">
+						Create and challenge yourself with 8 quick projects that
+						will teach cardboard construction, electronics, and
+						coding with a Micro:bit microcontroller. All of these
+						projects conclude on this website, allowing you to bring
+						your creations to life with the Teachable Machine project
+						you created.
+						<!-- Visit <mark>________</mark> to find out more about this
+						book. -->
+					</p>
+					<!-- <span class='btn-cont'> <a href="" target="_blank"><button>Read AI Robots Book</button></a></span> -->
+				</span>
 			</div>
 		</div>
 		<div id="page-2" class="init-hide">
@@ -92,14 +144,6 @@
 					<a href="/" class='restart-button'>
 						<button>Restart</button>
 					</a>
-					<span id='contContainer'>
-						<h3 id='contLabel'>Discontinous</h3>
-						<label class="switch">
-							<input type="checkbox" id='contToggle'>
-							<span class="slider round"></span>
-						</label>
-					</span>
-
 					<button id="startButton">Start!</button>
 					<div id='results' class='init-hide-imp'>
 						<h2>RESULTS!</h2>

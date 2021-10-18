@@ -2,9 +2,13 @@ let model, webcam, labelContainer, maxPredictions, ctx, modelName, socketId;
 let pageNumber = 1;
 let ignoredClasses = [];
 let found = {
-	continous: false,
+	continous: true,
 	bool: false,
 };
+
+let heldClasses = [];
+let continous = true;
+let lastDetection = '';
 
 // const socket = io();
 const socket = io('http://localhost:8080');
@@ -40,7 +44,6 @@ socket.on('valid-url', (valid) => {
 
 startButton.onclick = () => {
 	$('#startButton').addClass('disabled');
-	$('#contContainer').fadeOut();
 	$('#startButton').text('Loading');
 	$('#startButton').addClass('loading');
 	$('#results').removeClass('init-hide-imp');
@@ -95,25 +98,35 @@ function changePage(direction) {
 	}
 }
 
-// Toggle the whether the model will be continous after detecting a class
-$('#contToggle').click(() => {
-	found.continous = !found.continous;
-	if (found.continous) {
-		contLabel.innerHTML = 'Nonstop';
-	} else {
-		contLabel.innerHTML = 'Discontinous';
-	}
-});
+// $('#label-container').on('click', '.toggle-switch', function (event) {
+// 	event.stopPropagation();
+// 	event.stopImmediatePropagation();
+// 	let id = $(this).parents()[2].id;
+// 	for (let i = 0; i < ignoredClasses.length; i++) {
+// 		if (ignoredClasses[i] === id) {
+// 			ignoredClasses.splice(i, 1);
+// 			return;
+// 		}
+// 	}
+// 	continous = true;
+// 	ignoredClasses.push(id);
+// });
 
 $('#label-container').on('click', '.toggle-switch', function (event) {
 	event.stopPropagation();
 	event.stopImmediatePropagation();
 	let id = $(this).parents()[2].id;
-	for (let i = 0; i < ignoredClasses.length; i++) {
-		if (ignoredClasses[i] === id) {
-			ignoredClasses.splice(i, 1);
+	for (let i = 0; i < heldClasses.length; i++) {
+		if (heldClasses[i] === id) {
+			heldClasses.splice(i, 1);
+			//test
+			console.log(`${id}: removed`);
+			continous = true;
 			return;
 		}
 	}
-	ignoredClasses.push(id);
+
+	//test
+	console.log(`${id}: added`);
+	heldClasses.push(id);
 });
