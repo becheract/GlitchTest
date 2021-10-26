@@ -16,11 +16,11 @@ async function initImg() {
 	const flip = true; // whether to flip the webcam
 	webcam = new tmImage.Webcam(500, 500, flip); // width, height, flip
 	await webcam.setup(); // request access to the webcam
-	$('#startButton').fadeOut(() => {
-		$('#canvas').hide(() => {
-			$('#webcam-container').show();
-			$('#label-container').fadeIn();
-		});
+	$('#canvas').hide(() => {
+		$('.projectName').removeClass('loading');
+		$('.projectName').text('IMAGE MODEL');
+		$('#webcam-container').show();
+		$('#label-container').fadeIn();
 	});
 	await webcam.play();
 	window.requestAnimationFrame(imgLoop);

@@ -159,10 +159,6 @@ async function writeToSerial(value) {
 	// await writer.write(data);
 	// writer.releaseLock();
 
-	$('#startButton').removeClass('disabled');
-	$('#startButton').removeClass('loading');
-	$('#startButton').text('Start!');
-
 	if (!writer) {
 		const textEncoder = new TextEncoderStream();
 		writableStreamClosed = textEncoder.readable.pipeTo(port.writable);

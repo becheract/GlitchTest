@@ -34,13 +34,13 @@ async function initAudio(modelURL, metadataURL) {
 		audArr[i] = 0;
 	}
 
-	$('#startButton').fadeOut(() => {
-		$('#webcam-container').hide(() => {
-			$('#audio-container').fadeIn();
-			$('#canvas').hide();
-		});
-		$('#label-container').fadeIn();
+	$('#webcam-container').hide(() => {
+		$('.projectName').removeClass('loading');
+		$('.projectName').text('AUDIO MODEL');
+		$('#audio-container').fadeIn();
+		$('#canvas').hide();
 	});
+	$('#label-container').fadeIn();
 
 	// listen() takes two arguments:
 	// 1. A callback function that is invoked anytime a word is recognized.

@@ -31,27 +31,16 @@ socket.on('valid-url', (valid) => {
 		$('#webcam-container').fadeOut(() => {
 			$('#canvas').fadeOut();
 			$('#label-container').fadeOut();
-			$('#startButton').removeClass('disabled');
-			$('#startButton').text('Start!');
-			$('#startButton').removeClass('loading');
-			$('#startButton').fadeIn();
+			$('#results').removeClass('init-hide-imp');
+			found.bool = false;
+			openPort();
+			chooseModel(teachableUrl.value);
 			changePage(true);
 		});
 	} else {
-		alert('invalid URL');
+		alertUser('Invalid URL');
 	}
 });
-
-startButton.onclick = () => {
-	$('#startButton').addClass('disabled');
-	$('#startButton').text('Loading');
-	$('#startButton').addClass('loading');
-	$('#results').removeClass('init-hide-imp');
-
-	found.bool = false;
-	openPort();
-	chooseModel(teachableUrl.value);
-};
 
 // Choose between Image, Pose or Audio model based on the URL
 async function chooseModel(URL) {
@@ -66,14 +55,14 @@ async function chooseModel(URL) {
 	model = await tmImage.load(modelURL, metadataURL);
 	let metaName = model._metadata.modelName;
 	$('.undercard').fadeIn();
+	$('.projectName').text('Loading');
+	$('.projectName').addClass('loading');
+
 	if (metaName === 'tm-my-image-model') {
-		$('.projectName').text('IMAGE MODEL');
 		initImg();
 	} else if (metaName === 'TMv2') {
-		$('.projectName').text('AUDIO MODEL');
 		initAudio(modelURL, metadataURL);
 	} else if (metaName === 'my-pose-model') {
-		$('.projectName').text('POSE MODEL');
 		model = await tmPose.load(modelURL, metadataURL);
 		initPose();
 	} else {
@@ -98,20 +87,6 @@ function changePage(direction) {
 	}
 }
 
-// $('#label-container').on('click', '.toggle-switch', function (event) {
-// 	event.stopPropagation();
-// 	event.stopImmediatePropagation();
-// 	let id = $(this).parents()[2].id;
-// 	for (let i = 0; i < ignoredClasses.length; i++) {
-// 		if (ignoredClasses[i] === id) {
-// 			ignoredClasses.splice(i, 1);
-// 			return;
-// 		}
-// 	}
-// 	continous = true;
-// 	ignoredClasses.push(id);
-// });
-
 $('#label-container').on('click', '.toggle-switch', function (event) {
 	event.stopPropagation();
 	event.stopImmediatePropagation();
@@ -130,3 +105,16 @@ $('#label-container').on('click', '.toggle-switch', function (event) {
 	console.log(`${id}: added`);
 	heldClasses.push(id);
 });
+
+$('#help-button').click(() => {
+	$('.help-content').slideToggle();
+});
+
+function alertUser(msg) {
+	$('#alert-text').text(msg);
+	$('#alert-div').fadeIn(() => {
+		$('#alert-ok').click(() => {
+			$('#alert-div').fadeOut();
+		});
+	});
+}

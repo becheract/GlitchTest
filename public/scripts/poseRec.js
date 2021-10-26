@@ -17,7 +17,6 @@ async function initPose() {
 	const flip = true; // whether to flip the webcam
 	webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
 	await webcam.setup(); // request access to the webcam
-	$('#startButton').fadeOut();
 	await webcam.play();
 	window.requestAnimationFrame(poseLoop);
 
@@ -35,6 +34,8 @@ async function initPose() {
 		poseArr[i] = 0;
 	}
 	$('#webcam-container').hide(() => {
+		$('.projectName').removeClass('loading');
+		$('.projectName').text('POSE MODEL');
 		$('#canvas').fadeIn();
 		$('#label-container').fadeIn();
 	});
