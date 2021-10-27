@@ -2,6 +2,27 @@
 <html lang="en">
 
 	<head>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-61379406-5"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() { dataLayer.push(arguments); }
+			gtag('js', new Date());
+
+			gtag('config', 'UA-61379406-5');
+		</script>
+
+		<!-- Google Tag Manager -->
+		<script>(function (w, d, s, l, i) {
+				w[l] = w[l] || []; w[l].push({
+					'gtm.start':
+						new Date().getTime(), event: 'gtm.js'
+				}); var f = d.getElementsByTagName(s)[0],
+					j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+						'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+			})(window, document, 'script', 'dataLayer', 'GTM-WF39LXQ');</script>
+		<!-- End Google Tag Manager -->
+
 		<meta charset="utf-8" />
 		<title>Ai Training</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -20,6 +41,10 @@
 	</head>
 
 	<body>
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WF39LXQ" height="0" width="0"
+				style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
 		<div id="page-1">
 			<div class="page-container">
 				<div class="sctn">
@@ -52,13 +77,14 @@
 						learn from, the smarter and more efficient it will be.
 					</p>
 					<span class="btn-cont">
-						<a href="https://teachablemachine.withgoogle.com/" target="_blank">
+						<a href="https://teachablemachine.withgoogle.com/" target="_blank" id="GA-GTM-Btn-1">
 							<button class="small-btn">Google Teachable Machine</button>
 						</a>
 					</span>
 					<p class="description">
 						New to Google Teachable Machine? Follow these guidelines to learn more:
-						<a href="https://teachablemachine.withgoogle.com/faq" target="_blank"><em><strong>Guide to
+						<a class="GA-GTM" href="https://teachablemachine.withgoogle.com/faq" target="_blank"
+							id="GA-GTM-Lnk-1"><em><strong>Guide to
 									Teachable Machine</strong></em></a>
 					</p>
 				</span>
@@ -66,7 +92,7 @@
 					<p class="paragraph des-title">Never coded a micro:bit before?</p>
 					<p class="description main-des">
 						It’s simple. Visit the
-						<a href="https://makecode.microbit.org/" target="_blank">
+						<a href="https://makecode.microbit.org/" target="_blank" id="GA-Micro-Lnk-1">
 							<strong><em> Microbit Makecode Website </em></strong>
 						</a>
 						for tons of easy-to-follow lessons and projects. When you’re ready, download our special code to
@@ -74,12 +100,16 @@
 						control our inventions in no time at all.
 					</p>
 					<span class="btn-cont">
-						<a href="https://makecode.microbit.org/48764-76919-05919-76086" target="_blank"><button
-								class="small-btn">Special Micro:bit Makecode</button></a></span>
+						<a href="https://makecode.microbit.org/48764-76919-05919-76086" target="_blank"
+							id="GA-Micro-Btn-1">
+							<button class="small-btn">Special Micro:bit Makecode</button>
+						</a>
+					</span>
 					<p class="description">
 						New to Microbit Makecode? Follow these guidelines to learn more:
-						<a href="https://makecode.microbit.org/" target="_blank"><strong> <em>Microbit Makecode
-									Website</em></strong></a>
+						<a href="https://makecode.microbit.org/" target="_blank" id="GA-Micro-Lnk-1-2">
+							<strong><em>Microbit Makecode Website</em></strong>
+						</a>
 					</p>
 				</span>
 				<span>
@@ -101,10 +131,13 @@
 				<span class="help-section">
 					<h1>Not sure what to do?</h1>
 					<p>Visit the Teachable Machine to train an AI project:</p>
-					<button class="small-btn">Google Teachable Machine</button>
+					<a href="https://teachablemachine.withgoogle.com/" target="_blank" id="GA-GTM-Btn-2">
+						<button class="small-btn">Google Teachable Machine</button>
+					</a>
 					<p>
 						New to Google Teachable Machine? Follow these guidelines to learn more:
-						<a href="https://teachablemachine.withgoogle.com/faq" target="_blank">
+						<a class='GA-GTM' href="https://teachablemachine.withgoogle.com/faq" target="_blank"
+							id="GA-GTM-Lnk-2">
 							<em><strong>Guide to Teachable Machine</strong></em>
 						</a>
 					</p>
@@ -165,7 +198,7 @@
 						</div>
 					</div>
 					<div class="help-dropdown">
-						<button class="small-btn" id="help-button">HELP!</button>
+						<button class="small-btn GA-click" id="help-button">HELP!</button>
 						<div class="help-content">
 							<p><strong>What do these switches mean?</strong></p>
 							<span>
