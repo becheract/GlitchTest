@@ -16,7 +16,18 @@ async function initPose() {
 	const size = 500;
 	const flip = true; // whether to flip the webcam
 	webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
-	await webcam.setup(); // request access to the webcam
+	let camId = -1;
+
+	let selectedCam = $('#cam').find(':selected').text();
+	for (let i = 0; i < videoDevices.length; i++) {
+		if (videoDevices[i].label === selectedCam) camId = videoDevices[i].deviceId;
+	}
+	if (camId !== -1) {
+		await webcam.setup({ deviceId: camId }); // request access to the webcam
+	} else {
+		await webcam.setup(); // request access to the webcam
+	}
+
 	await webcam.play();
 	window.requestAnimationFrame(poseLoop);
 
@@ -38,10 +49,12 @@ async function initPose() {
 		$('.projectName').text('POSE MODEL');
 		$('#canvas').fadeIn();
 		$('#label-container').fadeIn();
+		$('#message-log').fadeIn();
 	});
 }
 
 async function poseLoop(timestamp) {
+	if (!open) addLog('Microbit Connection Closed');
 	if (continous) {
 		if (!continous && heldClasses.length > 0) continous = false;
 

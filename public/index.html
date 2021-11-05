@@ -35,9 +35,6 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,700;0,800;1,400&display=swap"
 			rel="stylesheet" />
-		<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
-			integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
-			crossorigin="anonymous" />
 	</head>
 
 	<body>
@@ -177,6 +174,18 @@
 						<input id="teachableUrl" type="url"
 							placeholder="https://teachablemachine.withgoogle.com/models/[...]" pattern="https://.*"
 							required />
+						<span id='cam-select'>
+							<p>
+								<label for="cam" class='choose-label'>Choose Camera:</label>
+								<select name="cam" id="cam"></select>
+							</p>
+						</span>
+						<span id='aud-select'>
+							<p>
+								<label for="aud" class='choose-label'>Choose Audio:</label>
+								<select name="aud" id="aud"></select>
+							</p>
+						</span>
 						<button id="submitUrl">Ready!</button>
 					</span>
 				</span>
@@ -214,8 +223,8 @@
 							</span>
 							<span>
 								<p><strong>ONE WINNER:</strong> Use this mode if you want your AI to stop after it makes
-									a
-									decision.</p>
+									a decision.
+								</p>
 								<span class="toggle-container">
 									<label class="switch">
 										<input type="checkbox" class="toggle-switch" checked disabled />
@@ -237,11 +246,21 @@
 				</div>
 				<div class="input-container">
 					<span class="restart-button">
-						<button onclick="window.location.href='https://w3docs.com';">Start New Project!</button>
+						<button onclick="window.location.reload(true)">Start New Project!</button>
 					</span>
 					<div id="webcam-container" class="webcam-container"></div>
 					<div class="webcam-container"><canvas id="canvas"></canvas></div>
-					<div id="audio-container" class="webcam-container"><i class="fas fa-volume-up"></i></div>
+					<div id="audio-container">
+						<canvas id="audioCanvas" width="400" height="400"></canvas>
+					</div>
+					<div class="log-dropdown">
+						<button class="small-btn" id="message-log">Open Message Log</button>
+						<div class="log-content">
+							<span id="log">
+								<p class="log-paragraph" id="firstLog">Interact and your logs will show up here!</p>
+							</span>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

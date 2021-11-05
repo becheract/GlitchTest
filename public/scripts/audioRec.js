@@ -6,6 +6,9 @@
 
 let audArr = [];
 let audSensitivity = 3;
+const audioCanvas = document.getElementById('audioCanvas');
+const visualCTX = audioCanvas.getContext('2d');
+let freqs;
 
 async function createModel(checkpointURL, metadataURL) {
 	const recognizer = speechCommands.create(
@@ -21,7 +24,76 @@ async function createModel(checkpointURL, metadataURL) {
 	return recognizer;
 }
 
+async function createVisuals() {
+	let audId;
+
+	let selectedAud = $('#aud').find(':selected').text();
+	for (let i = 0; i < audioDevices.length; i++) {
+		if (audioDevices[i].label === selectedAud) audId = audioDevices[i].deviceId;
+	}
+	navigator.mediaDevices
+		.getUserMedia({
+			audio: {
+				deviceId: audId || devices[0].deviceId,
+			},
+		})
+		.then((stream) => {
+			const context = new (window.AudioContext || window.webkitAudioContext)();
+			const analyser = context.createAnalyser();
+			const source = context.createMediaStreamSource(stream);
+			source.connect(analyser);
+
+			freqs = new Uint8Array(analyser.frequencyBinCount);
+
+			function draw() {
+				let radius = 75;
+				let bars = 100;
+
+				// Draw Background
+				visualCTX.fillStyle = 'white';
+				visualCTX.fillRect(0, 0, audioCanvas.width, audioCanvas.height);
+
+				// Draw circle
+				visualCTX.beginPath();
+				visualCTX.arc(audioCanvas.width / 2, audioCanvas.height / 2, radius, 0, 2 * Math.PI);
+				visualCTX.stroke();
+				analyser.getByteFrequencyData(freqs);
+
+				// Draw label
+				// visualCTX.font = '500 24px Helvetica Neue';
+				// const avg = [...Array(255).keys()].reduce((acc, curr) => acc + freqs[curr], 0) / 255;
+				// visualCTX.fillStyle = 'rgb(' + 200 + ', ' + (200 - avg) + ', ' + avg + ')';
+				// visualCTX.textAlign = 'center';
+				// visualCTX.textBaseline = 'top';
+				// visualCTX.fillText('sound', audioCanvas.width / 2, audioCanvas.height / 2 - 24);
+
+				// Draw bars
+				for (var i = 0; i < bars; i++) {
+					let radians = (Math.PI * 2) / bars;
+					let bar_height = freqs[i] * 0.5;
+
+					let x = audioCanvas.width / 2 + Math.cos(radians * i) * radius;
+					let y = audioCanvas.height / 2 + Math.sin(radians * i) * radius;
+					let x_end = audioCanvas.width / 2 + Math.cos(radians * i) * (radius + bar_height);
+					let y_end = audioCanvas.height / 2 + Math.sin(radians * i) * (radius + bar_height);
+					let color = 'rgb(' + 255 + ', ' + (200 - freqs[i]) + ', ' + freqs[i] + ')';
+					visualCTX.strokeStyle = color;
+					visualCTX.lineWidth = 3;
+					visualCTX.beginPath();
+					visualCTX.moveTo(x, y);
+					visualCTX.lineTo(x_end, y_end);
+					visualCTX.stroke();
+				}
+
+				requestAnimationFrame(draw);
+			}
+
+			requestAnimationFrame(draw);
+		});
+}
+
 async function initAudio(modelURL, metadataURL) {
+	createVisuals();
 	const recognizer = await createModel(modelURL, metadataURL);
 	const classLabels = recognizer.wordLabels(); // get class labels
 	const labelContainer = document.getElementById('label-container');
@@ -39,6 +111,7 @@ async function initAudio(modelURL, metadataURL) {
 		$('.projectName').text('AUDIO MODEL');
 		$('#audio-container').fadeIn();
 		$('#canvas').hide();
+		$('#message-log').fadeIn();
 	});
 	$('#label-container').fadeIn();
 
@@ -48,6 +121,7 @@ async function initAudio(modelURL, metadataURL) {
 
 	recognizer.listen(
 		(result) => {
+			if (!open) addLog('Microbit Connection Closed');
 			if (continous) {
 				if (!continous && heldClasses.length > 0) continous = false;
 				// render the probability scores per class

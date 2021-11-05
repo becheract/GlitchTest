@@ -72,6 +72,7 @@ async function chooseModel(URL) {
 
 // Serial Submit to  Microbit
 function serialSubmit(classPrediction) {
+	addLog(`AI predicted ${classPrediction}`);
 	writeToSerial(classPrediction);
 }
 
@@ -93,16 +94,14 @@ $('#label-container').on('click', '.toggle-switch', function (event) {
 	let id = $(this).parents()[2].id;
 	for (let i = 0; i < heldClasses.length; i++) {
 		if (heldClasses[i] === id) {
+			addLog(`${id} removed stop and hold`);
 			heldClasses.splice(i, 1);
-			//test
-			console.log(`${id}: removed`);
 			continous = true;
 			return;
 		}
 	}
 
-	//test
-	console.log(`${id}: added`);
+	addLog(`${id} assigned stop and hold`);
 	heldClasses.push(id);
 });
 
@@ -110,6 +109,11 @@ $('#help-button').click(() => {
 	$('.help-content').slideToggle();
 });
 
+$('#message-log').click(() => {
+	$('.log-content').slideToggle();
+});
+
+// Custom Alert Function
 function alertUser(msg) {
 	$('#alert-text').text(msg);
 	$('#alert-div').fadeIn(() => {
@@ -117,4 +121,13 @@ function alertUser(msg) {
 			$('#alert-div').fadeOut();
 		});
 	});
+}
+
+//Log Microbit Site actions
+function addLog(event) {
+	if ($('#log p').attr('id') === 'firstLog') {
+		$('#log').html(`<p class="log-paragraph"><strong>${new Date().toLocaleTimeString()}</strong>   ${event}</p><hr>`);
+	} else {
+		$('#log').append(`<p class="log-paragraph"><strong>${new Date().toLocaleTimeString()}</strong>   ${event}</p><hr>`);
+	}
 }

@@ -374,6 +374,43 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
   text-align: center;
 }
 
+#page-2 div:first-child #connectPort #cam-select,
+#page-2 div:first-child #connectPort #aud-select {
+  display: none;
+  width: 100%;
+  margin: 10px 0;
+  padding: 0 30px;
+}
+
+#page-2 div:first-child #connectPort #cam-select p,
+#page-2 div:first-child #connectPort #aud-select p {
+  font-size: 1.3rem;
+  text-align: left;
+  margin: 0;
+}
+
+#page-2 div:first-child #connectPort #cam-select select,
+#page-2 div:first-child #connectPort #aud-select select {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  max-width: 250px;
+  font-size: 1rem;
+  border: 2px solid #faaf3f;
+  border-radius: 5px;
+  padding: 7px;
+}
+
+#page-2 div:first-child #connectPort #cam-select select:before,
+#page-2 div:first-child #connectPort #aud-select select:before {
+  padding: 5px;
+}
+
+#page-2 div:first-child #connectPort #cam-select .choose-label,
+#page-2 div:first-child #connectPort #aud-select .choose-label {
+  padding: 0 10px 0 0;
+}
+
 #page-2 div:first-child #connectPort .input-container {
   width: 80%;
   -webkit-box-orient: vertical;
@@ -409,11 +446,11 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
   -webkit-box-shadow: -2px 3px 0px 1px #000;
           box-shadow: -2px 3px 0px 1px #000;
   font-weight: 700;
-  margin: 40px 0;
+  margin: 0 0;
 }
 
 #page-2 div:first-child #connectPort .input-container button:active {
-  margin: 42px 5px 2px 0;
+  margin: 2px 5px 2px 0;
   -webkit-box-shadow: 0 0 0 0 #fff;
           box-shadow: 0 0 0 0 #fff;
   border: 5px solid #000;
@@ -442,6 +479,11 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
 #page-3 #audio-container {
   display: none;
   text-align: center;
+}
+
+#page-3 #audio-container canvas {
+  width: 555px;
+  height: 100%;
 }
 
 #page-3 #audio-container .fas {
@@ -627,9 +669,6 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-}
-
-#page-3 .page-container .display .help-dropdown .help-content span:not(.toggle-container) input {
   cursor: default;
 }
 
@@ -657,6 +696,44 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
 
 #page-3 .page-container .input-container .restart-button button:hover {
   cursor: pointer;
+}
+
+#page-3 .page-container .input-container .log-dropdown {
+  position: relative;
+  margin-top: 20px;
+}
+
+#page-3 .page-container .input-container .log-dropdown #message-log {
+  z-index: 2;
+  width: 100%;
+  margin: 40px 0;
+  position: relative;
+  display: none;
+}
+
+#page-3 .page-container .input-container .log-dropdown #message-log:active {
+  margin: 45px 0px 29px -15px;
+}
+
+#page-3 .page-container .input-container .log-dropdown .log-content {
+  display: none;
+  position: absolute;
+  border: 2px solid #000;
+  border-radius: 50px;
+  padding: 30px;
+  background-color: #fff;
+  min-width: 160px;
+  z-index: 1;
+  width: 94%;
+  left: -14px;
+  top: 68px;
+  max-height: 400px;
+  overflow-x: auto;
+}
+
+#page-3 .page-container .input-container .log-dropdown .log-content .log-paragraph {
+  font-size: 1.4rem;
+  margin: 10px;
 }
 
 #page-3 .loading:after {

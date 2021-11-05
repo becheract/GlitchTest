@@ -1,6 +1,8 @@
-const { time } = require('console');
 const express = require('express');
 const app = express();
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 const server = require('http').createServer(app);
 const io = require('socket.io')(server, {
 	cors: {
@@ -12,7 +14,35 @@ const path = require('path');
 if (process.env.NODE_ENV !== 'production') {
 	require('dotenv').config();
 }
+
+const crypto = require('crypto');
+const { execSync } = require('child_process');
+
 let timeStamps = [];
+
+app.post('/git', (req, res) => {
+	const hmac = crypto.createHmac('sha1', process.env.SECRET);
+	const sig = 'sha1=' + hmac.update(JSON.stringify(req.body)).digest('hex');
+	if (req.headers['x-github-event'] === 'push' && crypto.timingSafeEqual(Buffer.from(sig), Buffer.from(req.headers['x-hub-signature']))) {
+		res.sendStatus(200);
+		const commands = [
+			'git fetch origin main',
+			'git reset --hard origin/main',
+			'git pull origin main --force',
+			'npm install',
+			// your build commands here
+			'refresh',
+		]; // fixes glitch ui
+		for (const cmd of commands) {
+			console.log(execSync(cmd).toString());
+		}
+		console.log('Updated with SteamlabsCA/AiTraining!');
+		return;
+	} else {
+		console.log('webhook signature incorrect!');
+		return res.sendStatus(403);
+	}
+});
 
 app.use('/static', express.static(path.join(__dirname, 'public')));
 

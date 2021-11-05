@@ -6,6 +6,9 @@ let reader;
 let readableStreamClosed;
 let writer;
 let writableStreamClosed;
+let videoInputs = 0;
+const videoDevices = [];
+const audioDevices = [];
 
 // console.log(`("serial" in navigator): ${'serial' in navigator}`);
 
@@ -26,6 +29,43 @@ requestPortButton.onclick = async (event) => {
 		});
 		console.log(port);
 		changePage(true);
+
+		if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
+			console.log('enumerateDevices() not supported.');
+			return;
+		} else {
+			// List cameras and microphones.
+			let vidCount = 1;
+			let audCount = 1;
+			navigator.mediaDevices
+				.enumerateDevices()
+				.then(function (mediaDevices) {
+					mediaDevices.forEach((mediaDevice) => {
+						if (mediaDevice.kind === 'videoinput') {
+							videoDevices.push(mediaDevice);
+							const option = document.createElement('option');
+							option.value = mediaDevice.deviceId;
+							const label = mediaDevice.label || `Camera ${vidCount++}`;
+							const textNode = document.createTextNode(label);
+							option.appendChild(textNode);
+							$('#cam').append(option);
+						} else if (mediaDevice.kind === 'audioinput') {
+							audioDevices.push(mediaDevice);
+							const option = document.createElement('option');
+							option.value = mediaDevice.deviceId;
+							const label = mediaDevice.label || `Audio ${audCount++}`;
+							const textNode = document.createTextNode(label);
+							option.appendChild(textNode);
+							$('#aud').append(option);
+						}
+					});
+				})
+				.catch(function (err) {
+					console.log(err.name + ': ' + err.message);
+				});
+			$('#cam-select').show();
+			$('#aud-select').show();
+		}
 	} catch (error) {
 		console.log(error);
 	} finally {

@@ -308,6 +308,37 @@ button:not(#alert-ok):not(.glitchButtonElement) {
 				text-align: center;
 			}
 
+			#cam-select,
+			#aud-select {
+				display: none;
+				width: 100%;
+				margin: 10px 0;
+				padding: 0 30px;
+
+				p {
+					font-size: 1.3rem;
+					text-align: left;
+					margin: 0;
+				}
+
+				select {
+					width: fit-content;
+					max-width: 250px;
+					font-size: 1rem;
+					border: 2px solid #faaf3f;
+					border-radius: 5px;
+					padding: 7px;
+
+					&:before {
+						padding: 5px;
+					}
+				}
+
+				.choose-label {
+					padding: 0 10px 0 0;
+				}
+			}
+
 			.input-container {
 				width: 80%;
 				flex-direction: column;
@@ -330,9 +361,9 @@ button:not(#alert-ok):not(.glitchButtonElement) {
 					border: 2px solid #000;
 					box-shadow: -2px 3px 0px 1px #000;
 					font-weight: 700;
-					margin: 40px 0;
+					margin: 0 0;
 					&:active {
-						margin: 42px 5px 2px 0;
+						margin: 2px 5px 2px 0;
 						box-shadow: 0 0 0 0 #fff;
 						border: 5px solid #000;
 					}
@@ -363,6 +394,11 @@ button:not(#alert-ok):not(.glitchButtonElement) {
 	#audio-container {
 		display: none;
 		text-align: center;
+
+		canvas {
+			width: 555px;
+			height: 100%;
+		}
 
 		.fas {
 			margin: 25%;
@@ -502,10 +538,7 @@ button:not(#alert-ok):not(.glitchButtonElement) {
 						display: flex;
 						align-items: center;
 						justify-content: center;
-
-						input {
-							cursor: default;
-						}
+						cursor: default;
 					}
 				}
 			}
@@ -532,6 +565,42 @@ button:not(#alert-ok):not(.glitchButtonElement) {
 
 					&:hover {
 						cursor: pointer;
+					}
+				}
+			}
+
+			.log-dropdown {
+				position: relative;
+				margin-top: 20px;
+				#message-log {
+					z-index: 2;
+					width: 100%;
+					margin: 40px 0;
+					position: relative;
+					display: none;
+
+					&:active {
+						margin: 45px 0px 29px -15px;
+					}
+				}
+				.log-content {
+					display: none;
+					position: absolute;
+					border: 2px solid #000;
+					border-radius: 50px;
+					padding: 30px;
+					background-color: #fff;
+					min-width: 160px;
+					z-index: 1;
+					width: 94%;
+					left: -14px;
+					top: 68px;
+					max-height: 400px;
+					overflow-x: auto;
+
+					.log-paragraph {
+						font-size: 1.4rem;
+						margin: 10px;
 					}
 				}
 			}
