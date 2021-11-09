@@ -205,6 +205,8 @@
 							<h2>RESULTS!</h2>
 							<div id="label-container"></div>
 						</div>
+						<span id="connect-msg">🟢 Microbit Connected</span>
+						<span id="disconnect-msg">🔴 Microbit Disconnected</span>
 					</div>
 					<div class="help-dropdown">
 						<button class="small-btn GA-click" id="help-button">HELP!</button>
@@ -245,8 +247,9 @@
 					</div>
 				</div>
 				<div class="input-container">
-					<span class="restart-button">
+					<span class="control-button">
 						<button onclick="window.location.reload(true)">Start New Project!</button>
+						<button id="closePortBtn">Disconnect Microbit</button>
 					</span>
 					<div id="webcam-container" class="webcam-container"></div>
 					<div class="webcam-container"><canvas id="canvas"></canvas></div>

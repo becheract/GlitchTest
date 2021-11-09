@@ -105,6 +105,15 @@ $('#label-container').on('click', '.toggle-switch', function (event) {
 	heldClasses.push(id);
 });
 
+$('#closePortBtn').click(() => {
+	closePort();
+	$('#closePortBtn').fadeOut(() => {
+		$('#connect-msg').fadeOut('slow', () => {
+			$('#disconnect-msg').fadeIn();
+		});
+	});
+});
+
 $('#help-button').click(() => {
 	$('.help-content').slideToggle();
 });

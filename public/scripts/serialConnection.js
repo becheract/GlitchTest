@@ -80,8 +80,95 @@ async function openPort() {
 		open = true;
 		$('#openPort').show();
 		console.log('Port connected to Microbit');
+		addLog('Microbit Connected');
 	} else {
 		console.log('Port already open...');
+	}
+}
+
+async function closePort() {
+	if (open) {
+		// // With no transform streams but still with a loop
+		// await reader.cancel();
+		// console.log("await reader.cancel()");
+		try {
+			// With transform streams.
+			if (reading) {
+				reader.cancel().catch((error) => console.log(error));
+				await readableStreamClosed.catch(() => {});
+				console.log('Reader Disconnected');
+				reading = false;
+				reader = null;
+			}
+
+			if (writing) {
+				writer.close();
+				await writableStreamClosed;
+				console.log('Writing Disconnected');
+				writing = false;
+				writer = null;
+			}
+		} catch (error) {
+			console.log(error);
+		} finally {
+			await port.close();
+			$('#openPort').hide();
+			console.log('Port disconnected from Microbit');
+			addLog('Microbit Disconnected');
+			open = false;
+		}
+	} else {
+		console.log('Port already closed...');
+	}
+}
+
+async function writeToSerial(value) {
+	// writer = port.writable.getWriter();
+	// const data = new Uint8Array([116, 114, 117, 101, 10]); // "true\n"
+	// await writer.write(data);
+	// writer.releaseLock();
+
+	if (!writer) {
+		const textEncoder = new TextEncoderStream();
+		writableStreamClosed = textEncoder.readable.pipeTo(port.writable);
+
+		writer = textEncoder.writable.getWriter();
+		writing = true;
+	}
+	await writer.write(value);
+}
+
+navigator.serial.addEventListener('connect', async (event) => {
+	console.log(event);
+	port = event.port;
+	await port.open({ baudrate: 9600 });
+	console.log(port);
+});
+
+navigator.serial.addEventListener('disconnect', (event) => {
+	console.log(event);
+});
+
+class LineBreakTransformer {
+	constructor() {
+		// A container for holding stream data g stream data until a new line.
+		this.chunks = '';
+	}
+
+	transform(chunk, controller) {
+		// Append new chunks to existing chunks.
+		this.chunks += chunk;
+		// For each line breaks in chunks, send the parsed lines out.
+		const lines = this.chunks.split('\r\n');
+		this.chunks = lines.pop();
+		lines.forEach((line) => controller.enqueue(line));
+		console.debug(`[LineBreakTransformer/transform] this.chunks: ${this.chunks}`);
+	}
+
+	flush(controller) {
+		console.log('flush', this.chunks);
+		// When the stream is closed, flush any remaining chunks out.
+		controller.enqueue(this.chunks);
 	}
 }
 
@@ -150,95 +237,8 @@ testButton.onclick = async (event) => {
 		writing = true;
 	}
 	await writer.write('test');
-};
+}; 
 
-closeButton.onclick = (event) => {
-	closePort();
-};
 
-async function closePort() {
-	if (open) {
-		// // With no transform streams but still with a loop
-		// await reader.cancel();
-		// console.log("await reader.cancel()");
-		try {
-			// With transform streams.
-			if (reading) {
-				reader.cancel().catch((error) => console.log(error));
-				await readableStreamClosed.catch(() => {});
-				console.log('Reader Disconnected');
-				reading = false;
-				reader = null;
-			}
-
-			if (writing) {
-				writer.close();
-				await writableStreamClosed;
-				console.log('Writing Disconnected');
-				writing = false;
-				writer = null;
-			}
-		} catch (error) {
-			console.log(error);
-		} finally {
-			await port.close();
-			$('#openPort').hide();
-			console.log('Port disconnected from Microbit');
-			open = false;
-		}
-	} else {
-		console.log('Port already closed...');
-	}
-}
 
 End: Future Development and Testing */
-
-async function writeToSerial(value) {
-	// writer = port.writable.getWriter();
-	// const data = new Uint8Array([116, 114, 117, 101, 10]); // "true\n"
-	// await writer.write(data);
-	// writer.releaseLock();
-
-	if (!writer) {
-		const textEncoder = new TextEncoderStream();
-		writableStreamClosed = textEncoder.readable.pipeTo(port.writable);
-
-		writer = textEncoder.writable.getWriter();
-		writing = true;
-	}
-	await writer.write(value);
-}
-
-navigator.serial.addEventListener('connect', async (event) => {
-	console.log(event);
-	port = event.port;
-	await port.open({ baudrate: 9600 });
-	console.log(port);
-});
-
-navigator.serial.addEventListener('disconnect', (event) => {
-	console.log(event);
-});
-
-class LineBreakTransformer {
-	constructor() {
-		// A container for holding stream data g stream data until a new line.
-		this.chunks = '';
-	}
-
-	transform(chunk, controller) {
-		// Append new chunks to existing chunks.
-		this.chunks += chunk;
-		// For each line breaks in chunks, send the parsed lines out.
-		const lines = this.chunks.split('\r\n');
-		this.chunks = lines.pop();
-		lines.forEach((line) => controller.enqueue(line));
-		console.debug(`[LineBreakTransformer/transform] this.chunks: ${this.chunks}`);
-	}
-
-	flush(controller) {
-		console.log('flush', this.chunks);
-		// When the stream is closed, flush any remaining chunks out.
-		controller.enqueue(this.chunks);
-	}
-}

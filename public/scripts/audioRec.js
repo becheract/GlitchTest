@@ -121,7 +121,6 @@ async function initAudio(modelURL, metadataURL) {
 
 	recognizer.listen(
 		(result) => {
-			if (!open) addLog('Microbit Connection Closed');
 			if (continous) {
 				if (!continous && heldClasses.length > 0) continous = false;
 				// render the probability scores per class

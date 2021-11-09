@@ -509,6 +509,15 @@ button:not(#alert-ok):not(.glitchButtonElement) {
 						}
 					}
 				}
+
+				#disconnect-msg,
+				#connect-msg {
+					margin: 31px 0 0;
+				}
+
+				#disconnect-msg {
+					display: none;
+				}
 			}
 			.help-dropdown {
 				position: relative;
@@ -545,7 +554,7 @@ button:not(#alert-ok):not(.glitchButtonElement) {
 		}
 
 		.input-container {
-			.restart-button {
+			.control-button {
 				width: 250px;
 
 				button {
@@ -555,12 +564,12 @@ button:not(#alert-ok):not(.glitchButtonElement) {
 					border: 2px solid #000;
 					box-shadow: -2px 3px 0px 1px #000;
 					font-weight: 700;
-					margin: 0 0 25px;
+					margin: 0 10px 25px;
 					float: right;
 
 					&:active {
 						box-shadow: 0 0 0 0 #fff;
-						margin: 5px 8px 14px;
+						margin: 5px 14px 14px 6px;
 					}
 
 					&:hover {
@@ -592,7 +601,7 @@ button:not(#alert-ok):not(.glitchButtonElement) {
 					background-color: #fff;
 					min-width: 160px;
 					z-index: 1;
-					width: 94%;
+					width: 95%;
 					left: -14px;
 					top: 68px;
 					max-height: 400px;

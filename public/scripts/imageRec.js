@@ -57,7 +57,6 @@ async function initImg() {
 }
 
 async function imgLoop() {
-	if (!open) addLog('Microbit Connection Closed');
 	if (continous) {
 		if (!continous && heldClasses.length > 0) continous = false;
 

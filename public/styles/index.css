@@ -630,6 +630,15 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
   word-wrap: break-word;
 }
 
+#page-3 .page-container .display .display-container #disconnect-msg,
+#page-3 .page-container .display .display-container #connect-msg {
+  margin: 31px 0 0;
+}
+
+#page-3 .page-container .display .display-container #disconnect-msg {
+  display: none;
+}
+
 #page-3 .page-container .display .help-dropdown {
   position: relative;
   margin-top: 20px;
@@ -672,11 +681,11 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
   cursor: default;
 }
 
-#page-3 .page-container .input-container .restart-button {
+#page-3 .page-container .input-container .control-button {
   width: 250px;
 }
 
-#page-3 .page-container .input-container .restart-button button {
+#page-3 .page-container .input-container .control-button button {
   width: 30%;
   padding: 15px 37px;
   border-radius: 100px;
@@ -684,17 +693,17 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
   -webkit-box-shadow: -2px 3px 0px 1px #000;
           box-shadow: -2px 3px 0px 1px #000;
   font-weight: 700;
-  margin: 0 0 25px;
+  margin: 0 10px 25px;
   float: right;
 }
 
-#page-3 .page-container .input-container .restart-button button:active {
+#page-3 .page-container .input-container .control-button button:active {
   -webkit-box-shadow: 0 0 0 0 #fff;
           box-shadow: 0 0 0 0 #fff;
-  margin: 5px 8px 14px;
+  margin: 5px 14px 14px 6px;
 }
 
-#page-3 .page-container .input-container .restart-button button:hover {
+#page-3 .page-container .input-container .control-button button:hover {
   cursor: pointer;
 }
 
@@ -724,7 +733,7 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
   background-color: #fff;
   min-width: 160px;
   z-index: 1;
-  width: 94%;
+  width: 95%;
   left: -14px;
   top: 68px;
   max-height: 400px;

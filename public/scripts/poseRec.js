@@ -54,7 +54,6 @@ async function initPose() {
 }
 
 async function poseLoop(timestamp) {
-	if (!open) addLog('Microbit Connection Closed');
 	if (continous) {
 		if (!continous && heldClasses.length > 0) continous = false;
 
