@@ -10,8 +10,6 @@ let videoInputs = 0;
 const videoDevices = [];
 const audioDevices = [];
 
-// console.log(`("serial" in navigator): ${'serial' in navigator}`);
-
 navigator.serial.getPorts().then(async (ports) => {
 	if (ports.length == 0) {
 		console.log('no serial ports');
@@ -21,14 +19,18 @@ navigator.serial.getPorts().then(async (ports) => {
 	// console.log(port);
 });
 
-requestPortButton.onclick = async (event) => {
+$('#requestPortButton, #reconnect-port').click(async (event) => {
 	document.body.style.display = 'none';
 	try {
 		port = await navigator.serial.requestPort({
 			// filters: [{ usbVendorId: 0x0d28, usbProductId: 0x0204 }]
 		});
 		console.log(port);
-		changePage(true);
+		if (pageNumber < maxPageNum) {
+			changePage(true);
+		} else {
+			closePort(1);
+		}
 
 		if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
 			console.log('enumerateDevices() not supported.');
@@ -71,7 +73,7 @@ requestPortButton.onclick = async (event) => {
 	} finally {
 		document.body.style.display = '';
 	}
-};
+});
 
 async function openPort() {
 	if (!open) {
@@ -86,7 +88,7 @@ async function openPort() {
 	}
 }
 
-async function closePort() {
+async function closePort(reopen = -1) {
 	if (open) {
 		// // With no transform streams but still with a loop
 		// await reader.cancel();
@@ -116,6 +118,7 @@ async function closePort() {
 			console.log('Port disconnected from Microbit');
 			addLog('Microbit Disconnected');
 			open = false;
+			if (reopen === 1) openPort();
 		}
 	} else {
 		console.log('Port already closed...');
@@ -135,6 +138,7 @@ async function writeToSerial(value) {
 		writer = textEncoder.writable.getWriter();
 		writing = true;
 	}
+	console.log(value);
 	await writer.write(value);
 }
 

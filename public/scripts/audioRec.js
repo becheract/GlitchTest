@@ -97,14 +97,7 @@ async function initAudio(modelURL, metadataURL) {
 	const recognizer = await createModel(modelURL, metadataURL);
 	const classLabels = recognizer.wordLabels(); // get class labels
 	const labelContainer = document.getElementById('label-container');
-	audArr = new Array(classLabels.length);
-
-	for (let i = 0; i < classLabels.length; i++) {
-		$('#label-container').append(
-			`<div class='meter' id="${classLabels[i]}"><p class='label'></p><span class='meter-container'><span><p></p></span></span><span class='toggle-container'><label class="switch"><input type="checkbox" class="toggle-switch" ><span class="slider round"></span></label></span></div>`
-		);
-		audArr[i] = 0;
-	}
+	audArr = createClasses(classLabels);
 
 	$('#webcam-container').hide(() => {
 		$('.projectName').removeClass('loading');
@@ -113,6 +106,7 @@ async function initAudio(modelURL, metadataURL) {
 		$('#canvas').hide();
 		$('#message-log').fadeIn();
 	});
+	if (cookie) $('#overlay').fadeOut();
 	$('#label-container').fadeIn();
 
 	// listen() takes two arguments:
@@ -121,17 +115,23 @@ async function initAudio(modelURL, metadataURL) {
 
 	recognizer.listen(
 		(result) => {
-			if (continous) {
+			if (continous && !settingsOpen) {
 				if (!continous && heldClasses.length > 0) continous = false;
 				// render the probability scores per class
 				for (let i = 0; i < classLabels.length; i++) {
-					labelContainer.childNodes[i].firstChild.innerHTML = classLabels[i];
-					labelContainer.childNodes[i].childNodes[1].firstChild.style.width = `${Math.floor(result.scores[i] * 100)}%`;
-					labelContainer.childNodes[i].childNodes[1].firstChild.firstChild.innerHTML = `${Math.floor(result.scores[i] * 100)}%`;
+					const meter = labelContainer.childNodes[i];
+					const span = meter.childNodes[1].firstChild;
+					const percentage = Math.floor(result.scores[i] * 100);
+
+					meter.firstChild.innerHTML = classLabels[i];
+					span.style.width = `${percentage}%`;
+					span.firstChild.innerHTML = `${percentage}%`;
+
 					if (result.scores[i].toFixed(2) > 0.9) {
 						audArr[i]++;
+						span.classList.add('threshold-color');
 
-						if (audArr[i] > audSensitivity) {
+						if (audArr[i] > (sensitivity * 5) / 100) {
 							for (let j = 0; j < heldClasses.length; j++) {
 								if (heldClasses[j] === classLabels[i]) {
 									continous = false;
@@ -140,11 +140,15 @@ async function initAudio(modelURL, metadataURL) {
 							if (classLabels[i] !== lastDetection) {
 								for (let i = 0; i < audArr.length; ++i) audArr[i] = 0;
 								lastDetection = classLabels[i];
+								$('.check-img').css('visibility', 'hidden');
+								$(`#check-${i}`).css('visibility', 'visible');
 								serialSubmit(classLabels[i]);
 							} else {
 								audArr[i] = 0;
 							}
 						}
+					} else {
+						span.classList.remove('threshold-color');
 					}
 				}
 			}

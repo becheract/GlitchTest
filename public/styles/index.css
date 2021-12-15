@@ -1,3 +1,4 @@
+/* Start: Variables */
 /* End: Variables */
 /* Standard Elements: Start */
 html,
@@ -5,6 +6,7 @@ body {
   height: 100%;
   font-family: 'Karla', sans-serif;
   margin: 0 !important;
+  background-color: #f0f0f0;
 }
 
 h1 {
@@ -38,11 +40,11 @@ button:not(#alert-ok):not(.glitchButtonElement) {
 }
 
 button:not(#alert-ok):not(.glitchButtonElement):hover:not(.glitchButtonElement):not(#alert-ok) {
-  background-color: #037f51 !important;
+  background-color: #f37423 !important;
 }
 
 button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement):not(#alert-ok) {
-  background-color: #106b5a;
+  background-color: #f37423;
   -webkit-box-shadow: 0 0 0 #fff;
           box-shadow: 0 0 0 #fff;
   border: 5px solid #000;
@@ -50,6 +52,25 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
 
 /* Standard Elements: End */
 /* Document Wide: Start */
+#overlay {
+  position: fixed;
+  /* Sit on top of the page content */
+  display: none;
+  /* Hidden by default */
+  width: 100%;
+  /* Full width (cover the whole page) */
+  height: 100%;
+  /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  /* Black background with opacity */
+  z-index: 10;
+  /* Specify a stack order in case you're using a different order for other elements */
+}
+
 #alert-div {
   display: none;
   background-color: #fff;
@@ -89,12 +110,28 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
   color: #fff;
 }
 
-.init-hide {
+.inline-block {
+  display: inline-block !important;
+}
+
+.flex {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+
+.hide {
   display: none;
 }
 
-.init-hide-imp {
+.hide-imp {
   display: none !important;
+}
+
+.settings-hidden {
+  display: none;
+  text-align: center;
+  margin: 10px 5px;
 }
 
 .sub-title {
@@ -125,12 +162,126 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
   border: 5px solid #000;
 }
 
+.popup {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  display: none;
+}
+
+.popup .help-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
+}
+
+.info-popup {
+  position: relative;
+  display: inline-block;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.info-popup button {
+  background-color: #fff;
+}
+
+.info-popup .info-text {
+  display: none;
+  width: 225px;
+  text-align: center;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 11;
+  border: 2px solid #000;
+  margin-left: -80px;
+}
+
+.info-popup .info-text::after {
+  border-width: 13px;
+  left: 55%;
+  border-color: transparent transparent #000 transparent;
+}
+
+.info-popup .info-text p {
+  font-weight: 700;
+}
+
+.info-popup #settingsInfo {
+  left: -55%;
+  top: 125%;
+}
+
+.info-popup #newCodeInfo {
+  left: 37%;
+  top: 125%;
+}
+
+.info-popup #logInfo {
+  bottom: 81%;
+  left: 43%;
+}
+
+.info-popup #logInfo::after {
+  left: 46%;
+  top: 101%;
+  border-color: #000 transparent transparent transparent;
+}
+
+.info-text,
+.popuptext {
+  background-color: #ffe7ba;
+  color: #000;
+  padding: 10px;
+}
+
+.info-text:after,
+.popuptext:after {
+  content: '';
+  position: absolute;
+  top: -28px;
+  border-width: 20px;
+  border-style: solid;
+  border-color: transparent transparent #ffe7ba transparent;
+}
+
+.popuptext {
+  display: none;
+  margin: 0 10px;
+  position: relative;
+}
+
+.popuptext span:not(.toggle-container) {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  cursor: default;
+}
+
 #page-1 {
   padding: 3em 2em 2em;
 }
 
 #page-3 {
   padding: 1em;
+}
+
+.threshold-color {
+  background-color: #158c76 !important;
 }
 
 /* Document Wide: End */
@@ -458,22 +609,29 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
 
 /* Page Two: End*/
 /* Page Three: Start*/
+#page-3 {
+  background-color: #f0f0f0;
+  padding: 1em 100px;
+}
+
 #page-3 h1 {
-  margin: 30px 30px 20px;
+  margin: 0 0 20px;
+}
+
+#page-3 .spin {
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
 }
 
 #page-3 .webcam-container {
-  width: 65vw;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  text-align: center;
 }
 
 #page-3 .webcam-container canvas {
   border: 4px solid #000;
-  border-radius: 7px;
-  width: 36vw;
-  margin: auto;
+  border-radius: 28px;
+  width: 555px;
+  height: 100%;
 }
 
 #page-3 #audio-container {
@@ -484,6 +642,8 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
 #page-3 #audio-container canvas {
   width: 555px;
   height: 100%;
+  border: 4px solid #000;
+  border-radius: 28px;
 }
 
 #page-3 #audio-container .fas {
@@ -497,13 +657,28 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
 }
 
 #page-3 .page-container .display {
-  width: 40%;
+  width: 35%;
   position: relative;
   margin: 80px 30px 0;
 }
 
+#page-3 .page-container .display .white-bck {
+  background-color: #fff;
+  padding: 30px 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 28px;
+}
+
 #page-3 .page-container .display .display-container {
-  border: 3px solid #000;
   padding: 0 0 31px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -515,7 +690,7 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  border-radius: 50px;
+  border-radius: 28px;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
@@ -524,20 +699,9 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
 #page-3 .page-container .display .display-container .description {
   width: 90%;
   margin: 20px 0;
-}
-
-#page-3 .page-container .display .display-container .undercard {
-  color: #fff;
   font-weight: 700;
-  background-color: #000;
-  padding: 10px 0;
-  width: 100%;
-  text-align: center;
-}
-
-#page-3 .page-container .display .display-container .undercard p {
-  margin: 0;
-  font-size: 1.3rem;
+  margin-top: 0;
+  font-size: 1.2rem;
 }
 
 #page-3 .page-container .display .display-container #results {
@@ -548,36 +712,627 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  border: 2px solid #000;
-  width: 90%;
-  border-radius: 50px;
-  padding: 20px 0 40px;
+  border: 1px solid #000;
+  width: 96%;
+  border-radius: 28px;
+  padding: 20px 0;
   overflow: auto;
-  max-height: 60vh;
 }
 
-#page-3 .page-container .display .display-container #results h2 {
-  margin: 10px 40px;
+#page-3 .page-container .display .display-container #results .heading {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-right: 10px;
+}
+
+#page-3 .page-container .display .display-container #results .heading h2 {
+  margin: 10px 20px;
 }
 
 #page-3 .page-container .display .display-container #results #label-container {
   overflow-y: auto;
+  max-height: 400px;
 }
 
-#page-3 .page-container .display .display-container #results #label-container div:nth-of-type(even) {
-  background-color: #fff;
-  color: #000;
+#page-3 .page-container .display .display-container #results #label-container .meter {
+  color: #fb937b;
 }
 
-#page-3 .page-container .display .display-container #results #label-container div:nth-of-type(odd) {
-  background-color: #000;
-  color: #fff;
+#page-3 .page-container .display .display-container #results #label-container .meter .meter-container {
+  background-color: #fee9e4;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .meter-container span {
+  background-color: #fb937b;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots {
+  opacity: 1;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(0) {
+  top: 14px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 3px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 1.35s linear infinite, final 0.2s 4s forwards, spot-0 0.7s 0.4/random 20.4s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 1.35s linear infinite, final 0.2s 4s forwards, spot-0 0.7s 0.4/random 20.4s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(1) {
+  top: 13px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 3.5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 1.35s linear infinite, final 0.2s 4s forwards, spot-1 0.7s 0.4/random 20.8s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 1.35s linear infinite, final 0.2s 4s forwards, spot-1 0.7s 0.4/random 20.8s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(2) {
+  top: 15px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 3.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 0.45s linear infinite, final 0.2s 4s forwards, spot-2 0.7s 0.4/random 20.1s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.1s 0.45s linear infinite, final 0.2s 4s forwards, spot-2 0.7s 0.4/random 20.1s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(3) {
+  top: 14px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 2.5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 0.45s linear infinite, final 0.2s 4s forwards, spot-3 0.7s 0.4/random 20.9s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.3s 0.45s linear infinite, final 0.2s 4s forwards, spot-3 0.7s 0.4/random 20.9s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(4) {
+  top: 7px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 6px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 1.35s linear infinite, final 0.2s 4s forwards, spot-4 0.7s 0.4/random 20.4s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 1.35s linear infinite, final 0.2s 4s forwards, spot-4 0.7s 0.4/random 20.4s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(5) {
+  top: 10px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 3.75px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 1.05s linear infinite, final 0.2s 4s forwards, spot-5 0.7s 0.4/random 20.5s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 1.05s linear infinite, final 0.2s 4s forwards, spot-5 0.7s 0.4/random 20.5s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(6) {
+  top: 7px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 2.5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 1.25s linear infinite, final 0.2s 4s forwards, spot-6 0.7s 0.4/random 21s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.1s 1.25s linear infinite, final 0.2s 4s forwards, spot-6 0.7s 0.4/random 21s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(7) {
+  top: 7px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 6.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 0.55s linear infinite, final 0.2s 4s forwards, spot-7 0.7s 0.4/random 21s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.1s 0.55s linear infinite, final 0.2s 4s forwards, spot-7 0.7s 0.4/random 21s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(8) {
+  top: 7px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 4px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 1.35s linear infinite, final 0.2s 4s forwards, spot-8 0.7s 0.4/random 20.2s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 1.35s linear infinite, final 0.2s 4s forwards, spot-8 0.7s 0.4/random 20.2s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(9) {
+  top: 11px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 3.5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 1.45s linear infinite, final 0.2s 4s forwards, spot-9 0.7s 0.4/random 20.4s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 1.45s linear infinite, final 0.2s 4s forwards, spot-9 0.7s 0.4/random 20.4s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(10) {
+  top: 8px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 4.75px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 0.35s linear infinite, final 0.2s 4s forwards, spot-10 0.7s 0.4/random 21s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 0.35s linear infinite, final 0.2s 4s forwards, spot-10 0.7s 0.4/random 21s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(11) {
+  top: 11px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 4.5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 1.35s linear infinite, final 0.2s 4s forwards, spot-11 0.7s 0.4/random 20.8s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.3s 1.35s linear infinite, final 0.2s 4s forwards, spot-11 0.7s 0.4/random 20.8s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(12) {
+  top: 15px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 3px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 1.45s linear infinite, final 0.2s 4s forwards, spot-12 0.7s 0.4/random 20.6s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.3s 1.45s linear infinite, final 0.2s 4s forwards, spot-12 0.7s 0.4/random 20.6s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(13) {
+  top: 10px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 3.5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 1.15s linear infinite, final 0.2s 4s forwards, spot-13 0.7s 0.4/random 20.3s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 1.15s linear infinite, final 0.2s 4s forwards, spot-13 0.7s 0.4/random 20.3s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(14) {
+  top: 10px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 3.5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 1.05s linear infinite, final 0.2s 4s forwards, spot-14 0.7s 0.4/random 20.8s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.1s 1.05s linear infinite, final 0.2s 4s forwards, spot-14 0.7s 0.4/random 20.8s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(15) {
+  top: 11px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 6.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 0.85s linear infinite, final 0.2s 4s forwards, spot-15 0.7s 0.4/random 20.1s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.1s 0.85s linear infinite, final 0.2s 4s forwards, spot-15 0.7s 0.4/random 20.1s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(16) {
+  top: 9px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 5.5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.45s linear infinite, final 0.2s 4s forwards, spot-16 0.7s 0.4/random 20.1s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 0.45s linear infinite, final 0.2s 4s forwards, spot-16 0.7s 0.4/random 20.1s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(17) {
+  top: 13px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 3.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 0.75s linear infinite, final 0.2s 4s forwards, spot-17 0.7s 0.4/random 21s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.3s 0.75s linear infinite, final 0.2s 4s forwards, spot-17 0.7s 0.4/random 21s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(18) {
+  top: 15px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 4.75px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 1.25s linear infinite, final 0.2s 4s forwards, spot-18 0.7s 0.4/random 20.3s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 1.25s linear infinite, final 0.2s 4s forwards, spot-18 0.7s 0.4/random 20.3s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(19) {
+  top: 15px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 6.75px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 1.25s linear infinite, final 0.2s 4s forwards, spot-19 0.7s 0.4/random 20.2s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 1.25s linear infinite, final 0.2s 4s forwards, spot-19 0.7s 0.4/random 20.2s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(20) {
+  top: 9px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 6.75px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.35s linear infinite, final 0.2s 4s forwards, spot-20 0.7s 0.4/random 20.7s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 0.35s linear infinite, final 0.2s 4s forwards, spot-20 0.7s 0.4/random 20.7s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(21) {
+  top: 8px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 4.5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 0.75s linear infinite, final 0.2s 4s forwards, spot-21 0.7s 0.4/random 20.7s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.1s 0.75s linear infinite, final 0.2s 4s forwards, spot-21 0.7s 0.4/random 20.7s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(22) {
+  top: 12px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 3.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.45s linear infinite, final 0.2s 4s forwards, spot-22 0.7s 0.4/random 20.9s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 0.45s linear infinite, final 0.2s 4s forwards, spot-22 0.7s 0.4/random 20.9s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(23) {
+  top: 8px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 4.5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 0.85s linear infinite, final 0.2s 4s forwards, spot-23 0.7s 0.4/random 20.7s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.1s 0.85s linear infinite, final 0.2s 4s forwards, spot-23 0.7s 0.4/random 20.7s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(24) {
+  top: 9px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 7px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 0.55s linear infinite, final 0.2s 4s forwards, spot-24 0.7s 0.4/random 20.2s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.3s 0.55s linear infinite, final 0.2s 4s forwards, spot-24 0.7s 0.4/random 20.2s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(25) {
+  top: 8px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 2.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 0.75s linear infinite, final 0.2s 4s forwards, spot-25 0.7s 0.4/random 20.9s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.3s 0.75s linear infinite, final 0.2s 4s forwards, spot-25 0.7s 0.4/random 20.9s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(26) {
+  top: 11px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 4.75px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 1.25s linear infinite, final 0.2s 4s forwards, spot-26 0.7s 0.4/random 20.7s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.3s 1.25s linear infinite, final 0.2s 4s forwards, spot-26 0.7s 0.4/random 20.7s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(27) {
+  top: 15px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 3.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 1.05s linear infinite, final 0.2s 4s forwards, spot-27 0.7s 0.4/random 20.1s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.1s 1.05s linear infinite, final 0.2s 4s forwards, spot-27 0.7s 0.4/random 20.1s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(28) {
+  top: 10px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 3.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 1.05s linear infinite, final 0.2s 4s forwards, spot-28 0.7s 0.4/random 20.1s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.3s 1.05s linear infinite, final 0.2s 4s forwards, spot-28 0.7s 0.4/random 20.1s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(29) {
+  top: 9px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 6px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 0.85s linear infinite, final 0.2s 4s forwards, spot-29 0.7s 0.4/random 20.6s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.1s 0.85s linear infinite, final 0.2s 4s forwards, spot-29 0.7s 0.4/random 20.6s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(30) {
+  top: 12px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 4.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 1.45s linear infinite, final 0.2s 4s forwards, spot-30 0.7s 0.4/random 20.1s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.3s 1.45s linear infinite, final 0.2s 4s forwards, spot-30 0.7s 0.4/random 20.1s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(31) {
+  top: 7px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 3.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.75s linear infinite, final 0.2s 4s forwards, spot-31 0.7s 0.4/random 21s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 0.75s linear infinite, final 0.2s 4s forwards, spot-31 0.7s 0.4/random 21s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(32) {
+  top: 6px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 2.75px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 0.85s linear infinite, final 0.2s 4s forwards, spot-32 0.7s 0.4/random 20.3s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.3s 0.85s linear infinite, final 0.2s 4s forwards, spot-32 0.7s 0.4/random 20.3s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(33) {
+  top: 6px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 6.5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 1.15s linear infinite, final 0.2s 4s forwards, spot-33 0.7s 0.4/random 20.1s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 1.15s linear infinite, final 0.2s 4s forwards, spot-33 0.7s 0.4/random 20.1s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(34) {
+  top: 11px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 2.75px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.55s linear infinite, final 0.2s 4s forwards, spot-34 0.7s 0.4/random 20.4s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 0.55s linear infinite, final 0.2s 4s forwards, spot-34 0.7s 0.4/random 20.4s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(35) {
+  top: 9px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 2.75px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 1.35s linear infinite, final 0.2s 4s forwards, spot-35 0.7s 0.4/random 20.8s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.1s 1.35s linear infinite, final 0.2s 4s forwards, spot-35 0.7s 0.4/random 20.8s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(36) {
+  top: 9px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 4px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 0.75s linear infinite, final 0.2s 4s forwards, spot-36 0.7s 0.4/random 20.2s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.1s 0.75s linear infinite, final 0.2s 4s forwards, spot-36 0.7s 0.4/random 20.2s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(37) {
+  top: 10px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 6.5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.55s linear infinite, final 0.2s 4s forwards, spot-37 0.7s 0.4/random 20.9s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 0.55s linear infinite, final 0.2s 4s forwards, spot-37 0.7s 0.4/random 20.9s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(38) {
+  top: 13px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 3.5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.85s linear infinite, final 0.2s 4s forwards, spot-38 0.7s 0.4/random 21s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 0.85s linear infinite, final 0.2s 4s forwards, spot-38 0.7s 0.4/random 21s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(39) {
+  top: 7px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 4.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 0.85s linear infinite, final 0.2s 4s forwards, spot-39 0.7s 0.4/random 20.8s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 0.85s linear infinite, final 0.2s 4s forwards, spot-39 0.7s 0.4/random 20.8s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(40) {
+  top: 14px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 6.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 1.25s linear infinite, final 0.2s 4s forwards, spot-40 0.7s 0.4/random 20.4s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.1s 1.25s linear infinite, final 0.2s 4s forwards, spot-40 0.7s 0.4/random 20.4s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(41) {
+  top: 6px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 2.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 0.95s linear infinite, final 0.2s 4s forwards, spot-41 0.7s 0.4/random 21s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.1s 0.95s linear infinite, final 0.2s 4s forwards, spot-41 0.7s 0.4/random 21s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(42) {
+  top: 15px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 6.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 0.65s linear infinite, final 0.2s 4s forwards, spot-42 0.7s 0.4/random 20.6s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.3s 0.65s linear infinite, final 0.2s 4s forwards, spot-42 0.7s 0.4/random 20.6s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(43) {
+  top: 7px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 2.75px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.35s linear infinite, final 0.2s 4s forwards, spot-43 0.7s 0.4/random 20.2s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 0.35s linear infinite, final 0.2s 4s forwards, spot-43 0.7s 0.4/random 20.2s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(44) {
+  top: 6px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 6.75px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.65s linear infinite, final 0.2s 4s forwards, spot-44 0.7s 0.4/random 20.6s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 0.65s linear infinite, final 0.2s 4s forwards, spot-44 0.7s 0.4/random 20.6s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(45) {
+  top: 12px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 6px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 0.55s linear infinite, final 0.2s 4s forwards, spot-45 0.7s 0.4/random 20.9s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 0.55s linear infinite, final 0.2s 4s forwards, spot-45 0.7s 0.4/random 20.9s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(46) {
+  top: 9px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 0.85s linear infinite, final 0.2s 4s forwards, spot-46 0.7s 0.4/random 20.8s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.3s 0.85s linear infinite, final 0.2s 4s forwards, spot-46 0.7s 0.4/random 20.8s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(47) {
+  top: 7px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 7px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 1.45s linear infinite, final 0.2s 4s forwards, spot-47 0.7s 0.4/random 20.5s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.1s 1.45s linear infinite, final 0.2s 4s forwards, spot-47 0.7s 0.4/random 20.5s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(48) {
+  top: 12px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 4px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 1.45s linear infinite, final 0.2s 4s forwards, spot-48 0.7s 0.4/random 20.3s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 1.45s linear infinite, final 0.2s 4s forwards, spot-48 0.7s 0.4/random 20.3s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(49) {
+  top: 10px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 4.5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 0.35s linear infinite, final 0.2s 4s forwards, spot-49 0.7s 0.4/random 20.4s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 0.35s linear infinite, final 0.2s 4s forwards, spot-49 0.7s 0.4/random 20.4s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(50) {
+  top: 7px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 5.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 1.05s linear infinite, final 0.2s 4s forwards, spot-50 0.7s 0.4/random 20.2s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 1.05s linear infinite, final 0.2s 4s forwards, spot-50 0.7s 0.4/random 20.2s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(51) {
+  top: 13px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 6.75px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 0.95s linear infinite, final 0.2s 4s forwards, spot-51 0.7s 0.4/random 20.5s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.3s 0.95s linear infinite, final 0.2s 4s forwards, spot-51 0.7s 0.4/random 20.5s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(52) {
+  top: 9px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 6.75px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 0.85s linear infinite, final 0.2s 4s forwards, spot-52 0.7s 0.4/random 20.6s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.1s 0.85s linear infinite, final 0.2s 4s forwards, spot-52 0.7s 0.4/random 20.6s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(53) {
+  top: 13px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 2.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 1.45s linear infinite, final 0.2s 4s forwards, spot-53 0.7s 0.4/random 20.2s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 1.45s linear infinite, final 0.2s 4s forwards, spot-53 0.7s 0.4/random 20.2s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(54) {
+  top: 7px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 7px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 1.05s linear infinite, final 0.2s 4s forwards, spot-54 0.7s 0.4/random 20.1s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 1.05s linear infinite, final 0.2s 4s forwards, spot-54 0.7s 0.4/random 20.1s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(55) {
+  top: 12px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 5.5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 1.35s linear infinite, final 0.2s 4s forwards, spot-55 0.7s 0.4/random 20.5s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.3s 1.35s linear infinite, final 0.2s 4s forwards, spot-55 0.7s 0.4/random 20.5s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(56) {
+  top: 9px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 3.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 0.35s linear infinite, final 0.2s 4s forwards, spot-56 0.7s 0.4/random 21s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 0.35s linear infinite, final 0.2s 4s forwards, spot-56 0.7s 0.4/random 21s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(57) {
+  top: 8px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 3.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 1.45s linear infinite, final 0.2s 4s forwards, spot-57 0.7s 0.4/random 20.9s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.1s 1.45s linear infinite, final 0.2s 4s forwards, spot-57 0.7s 0.4/random 20.9s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(58) {
+  top: 6px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 2.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.85s linear infinite, final 0.2s 4s forwards, spot-58 0.7s 0.4/random 20.4s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 0.85s linear infinite, final 0.2s 4s forwards, spot-58 0.7s 0.4/random 20.4s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(59) {
+  top: 6px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 0.55s linear infinite, final 0.2s 4s forwards, spot-59 0.7s 0.4/random 20.3s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 0.55s linear infinite, final 0.2s 4s forwards, spot-59 0.7s 0.4/random 20.3s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(60) {
+  top: 8px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 7px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 0.65s linear infinite, final 0.2s 4s forwards, spot-60 0.7s 0.4/random 20.2s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 0.65s linear infinite, final 0.2s 4s forwards, spot-60 0.7s 0.4/random 20.2s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter:nth-of-type(3n + 2) {
+  color: #e19f26;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter:nth-of-type(3n + 2) .meter-container {
+  background-color: #f9ecd4;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter:nth-of-type(3n + 2) .meter-container span {
+  background-color: #e19f26;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter:nth-of-type(3n + 3) {
+  color: #5daac7;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter:nth-of-type(3n + 3) .meter-container {
+  background-color: #deeef4;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter:nth-of-type(3n + 3) .meter-container span {
+  background-color: #5daac7;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter {
   -webkit-box-sizing: content-box;
           box-sizing: content-box;
-  text-transform: uppercase;
   height: 20px;
   /* Can be anything */
   display: -webkit-box;
@@ -597,14 +1352,12 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
 
 #page-3 .page-container .display .display-container #results #label-container .meter .meter-container {
   width: 50%;
-  background-color: #d5e6da;
   border-radius: 4px;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .meter-container span {
   height: 25px;
   border-radius: 4px;
-  background-color: #2bc253;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -628,15 +1381,60 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
 
 #page-3 .page-container .display .display-container #results #label-container .meter .label {
   word-wrap: break-word;
+  font-weight: 700;
 }
 
-#page-3 .page-container .display .display-container #disconnect-msg,
-#page-3 .page-container .display .display-container #connect-msg {
-  margin: 31px 0 0;
+#page-3 .page-container .display .display-container #results #switchesPop::after {
+  right: 30px;
 }
 
-#page-3 .page-container .display .display-container #disconnect-msg {
+#page-3 .page-container .display .display-container #results #sliderPop::after {
+  left: 50px;
+}
+
+#page-3 .page-container .display .display-container #results .tolerance-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  margin: 10px 0;
+}
+
+#page-3 .page-container .display .display-container #results .tolerance-container .slider-container {
+  padding: 10px !important;
+  width: 50%;
   display: none;
+}
+
+#page-3 .page-container .display .display-container #results .tolerance-container .slider-container #slider {
+  background-color: #c4c4c4;
+  border: none;
+  height: 31px;
+}
+
+#page-3 .page-container .display .display-container #results .tolerance-container .slider-container .ui-slider-horizontal .ui-slider-handle {
+  top: 0;
+  padding: 5px;
+}
+
+#page-3 .page-container .display .display-container #results .tolerance-container .slider-container .ui-slider .ui-slider-range {
+  background-color: #e19f26;
+}
+
+#page-3 .page-container .display .display-container #results .tolerance-container .slider-container .ui-slider .ui-slider-handle {
+  width: 2em;
+  left: -0.6em;
+  height: 100%;
+  text-decoration: none;
+  text-align: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 #page-3 .page-container .display .help-dropdown {
@@ -659,7 +1457,7 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
   display: none;
   position: absolute;
   border: 2px solid #000;
-  border-radius: 50px;
+  border-radius: 28px;
   padding: 30px;
   background-color: #fff;
   min-width: 160px;
@@ -668,48 +1466,56 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
   top: 24px;
 }
 
-#page-3 .page-container .display .help-dropdown .help-content span:not(.toggle-container) {
+#page-3 .page-container .input-container {
+  width: 65%;
+}
+
+#page-3 .page-container .input-container .control-button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  cursor: default;
+  margin: 30px auto;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
-#page-3 .page-container .input-container .control-button {
-  width: 250px;
+#page-3 .page-container .input-container .control-button img {
+  width: 36px;
+  height: auto;
+  cursor: pointer;
+  margin: 0px 9px;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
 }
 
-#page-3 .page-container .input-container .control-button button {
-  width: 30%;
-  padding: 15px 37px;
+#page-3 .page-container .input-container .control-button button,
+#page-3 .page-container .input-container .info-text button {
+  padding: 7px 37px;
   border-radius: 100px;
   border: 2px solid #000;
   -webkit-box-shadow: -2px 3px 0px 1px #000;
           box-shadow: -2px 3px 0px 1px #000;
   font-weight: 700;
-  margin: 0 10px 25px;
-  float: right;
+  font-size: 1rem;
 }
 
-#page-3 .page-container .input-container .control-button button:active {
+#page-3 .page-container .input-container .control-button button:active,
+#page-3 .page-container .input-container .info-text button:active {
   -webkit-box-shadow: 0 0 0 0 #fff;
           box-shadow: 0 0 0 0 #fff;
-  margin: 5px 14px 14px 6px;
-}
-
-#page-3 .page-container .input-container .control-button button:hover {
-  cursor: pointer;
+  margin: 14px 16px 0px -2px;
 }
 
 #page-3 .page-container .input-container .log-dropdown {
   position: relative;
-  margin-top: 20px;
+  margin: 20px auto 0;
+  width: 555px;
 }
 
 #page-3 .page-container .input-container .log-dropdown #message-log {
@@ -718,30 +1524,32 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
   margin: 40px 0;
   position: relative;
   display: none;
+  -webkit-box-shadow: -2px 4px 0px 0px #000;
+          box-shadow: -2px 4px 0px 0px #000;
 }
 
 #page-3 .page-container .input-container .log-dropdown #message-log:active {
-  margin: 45px 0px 29px -15px;
+  margin: 45px 0px 29px -6px;
 }
 
 #page-3 .page-container .input-container .log-dropdown .log-content {
   display: none;
   position: absolute;
   border: 2px solid #000;
-  border-radius: 50px;
+  border-radius: 28px;
   padding: 30px;
   background-color: #fff;
   min-width: 160px;
   z-index: 1;
-  width: 95%;
-  left: -14px;
+  width: 99%;
+  left: 0;
   top: 68px;
-  max-height: 400px;
+  max-height: 200px;
   overflow-x: auto;
 }
 
 #page-3 .page-container .input-container .log-dropdown .log-content .log-paragraph {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   margin: 10px;
 }
 
@@ -765,11 +1573,22 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
   width: -moz-fit-content;
   width: fit-content;
   margin: 0 10px;
+  height: 34px;
+}
+
+#page-3 .toggle-container .check {
+  display: inline-block;
+}
+
+#page-3 .toggle-container .check img {
+  visibility: hidden;
+  width: 60px;
+  height: 34px;
 }
 
 #page-3 .toggle-container .switch {
   position: relative;
-  display: inline-block;
+  display: none;
   width: 60px;
   height: 34px;
 }
@@ -865,6 +1684,9 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
   }
   #page-2 .input-container {
     width: 55%;
+  }
+  #page-3 {
+    padding: 1em 50px;
   }
   #page-3 .webcam-container {
     width: 56vw;

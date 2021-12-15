@@ -35,20 +35,25 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,700;0,800;1,400&display=swap"
 			rel="stylesheet" />
+
+		<!-- Jquery Styles -->
+		<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
 	</head>
 
-	<body>
+	<body onload="checkCookie()">
 		<!-- Google Tag Manager (noscript) -->
 		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WF39LXQ" height="0" width="0"
 				style="display:none;visibility:hidden"></iframe></noscript>
 		<!-- End Google Tag Manager (noscript) -->
+
 		<div id="page-1">
 			<div class="page-container">
 				<div class="sctn">
 					<p class="sub-title">Welcome to the</p>
-					<h1 class="title">Robot inventions Ai Judge</h1>
+					<h1 class="title">A Micro:bit of AI</h1>
 					<p class="paragraph">
-						This site will help bridge the gap between the Teachable Machine AI and a micro:bit giving you
+						This site will help bridge the gap between the Teachable Machine AI and a micro:bit giving
+						you
 						clever new ways to shape your projects. Train an AI to make a prediction using a library of
 						data you give it, and then code your micro bit to use those predictions to activate motors,
 						lights, and more! Simply click on "Pair Microbit" and follow the steps to get started today!
@@ -57,12 +62,13 @@
 						<button id="requestPortButton">
 							<h1>Pair Microbit</h1>
 						</button>
-						<p class="paragraph btn-sub">Select the Microbit in the popup screen. Psst, it might be called
+						<p class="paragraph btn-sub">Select the Microbit in the popup screen. Psst, it might be
+							called
 							mbed Serial Port.</p>
 					</span>
 				</div>
 				<div class="sctn img-sctn"></div>
-				<img src="static/assets/microbit.png" class="microbit-img" alt="Microbit.png" />
+				<img src="static/assets/images/microbit.png" class="microbit-img" alt="Microbit.png" />
 			</div>
 			<div class="page-bottom">
 				<span>
@@ -70,7 +76,8 @@
 						website to create your own Machine</p>
 					<p class="description main-des">
 						Learning project in 3 simple steps. No experience required! Teach an AI to recognize and
-						classify audio or image data, and it can tell you its prediction. The more information it has to
+						classify audio or image data, and it can tell you its prediction. The more information it
+						has to
 						learn from, the smarter and more efficient it will be.
 					</p>
 					<span class="btn-cont">
@@ -92,7 +99,8 @@
 						<a href="https://makecode.microbit.org/" target="_blank" id="GA-Micro-Lnk-1">
 							<strong><em> Microbit Makecode Website </em></strong>
 						</a>
-						for tons of easy-to-follow lessons and projects. When you’re ready, download our special code to
+						for tons of easy-to-follow lessons and projects. When you’re ready, download our special
+						code to
 						help your micro:bit talk to this website. Add the code you want and we’ll get that AI to
 						control our inventions in no time at all.
 					</p>
@@ -113,7 +121,8 @@
 					<p class="paragraph des-title">‘AI Robots’ is also a book!</p>
 					<p class="description main-des">
 						Create and challenge yourself with 8 quick projects that will teach cardboard construction,
-						electronics, and coding with a Micro:bit microcontroller. All of these projects conclude on this
+						electronics, and coding with a Micro:bit microcontroller. All of these projects conclude on
+						this
 						website, allowing you to bring your creations to life with the Teachable Machine project you
 						created.
 						<!-- Visit <mark>________</mark> to find out more about this
@@ -123,7 +132,7 @@
 				</span>
 			</div>
 		</div>
-		<div id="page-2" class="init-hide">
+		<div id="page-2" class="hide">
 			<div>
 				<span class="help-section">
 					<h1>Not sure what to do?</h1>
@@ -142,19 +151,20 @@
 						<h2>When you have finished training your model, follow these 4 simple steps:</h2>
 						<div class="instruction">
 							<p><strong>1.</strong> Click “Export Model”</p>
-							<img src="static/assets/TMS_1.png" class="tms-img" alt="TMS_1.png" />
+							<img src="static/assets/images/TMS_1.png" class="tms-img" alt="TMS_1.png" />
 						</div>
 						<div class="instruction">
 							<p><strong>2.</strong> Click “Upload My Model”</p>
-							<img src="static/assets/TMS_2.png" class="tms-img" alt="TMS_2.png" />
+							<img src="static/assets/images/TMS_2.png" class="tms-img" alt="TMS_2.png" />
 						</div>
 						<div class="instruction">
 							<p><strong>3.</strong> Wait a moment</p>
-							<img src="static/assets/TMS_3.png" class="tms-img" alt="TMS_3.png" />
+							<img src="static/assets/images/TMS_3.png" class="tms-img" alt="TMS_3.png" />
 						</div>
 						<div class="instruction">
-							<p><strong>4.</strong> Click “Copy” to copy your link and paste it in the space above</p>
-							<img src="static/assets/TMS_4.png" class="tms-img" alt="TMS_4.png" />
+							<p><strong>4.</strong> Click “Copy” to copy your link and paste it in the space above
+							</p>
+							<img src="static/assets/images/TMS_4.png" class="tms-img" alt="TMS_4.png" />
 						</div>
 					</span>
 				</span>
@@ -191,49 +201,79 @@
 				</span>
 			</div>
 		</div>
-		<div id="page-3" class="init-hide">
+		<div id="page-3" class="hide">
+			<div id="overlay"></div>
 			<div class="page-container">
 				<div class="display">
 					<div class="display-container">
-						<h1>AI ROBOT</h1>
-						<span class="undercard init-hide">
-							<p class="projectName">Model Project</p>
-						</span>
-						<p class="description">This is a Recognition Project - where the AI will be able to identify the
-							classes you made based on the input you give it!</p>
-						<div id="results" class="init-hide-imp">
-							<h2>RESULTS!</h2>
-							<div id="label-container"></div>
+						<h1 class="projectName">Loading...</h1>
+						<div class="white-bck">
+							<p class="description">This is a Recognition Project - where the AI will be able to
+								identify
+								the
+								classes you made based on the input you give it!</p>
+							<div id="results" class="hide-imp">
+								<span class="heading">
+									<h2 id="results-heading">RESULTS!</h2>
+
+									<span class="popup" onclick="togglePopup('switchesPop')">
+										Inputs <img src="static/assets/images/question_filled.svg" class="help-icon"
+											alt="help icon" />
+									</span>
+								</span>
+								<p class="settings-hidden">( Psst remember to close the settings when you're done
+									editing )</p>
+								<span class="popuptext" id="switchesPop">
+									<span>
+										<p><strong>ALWAYS WATCHING:</strong> Use this mode if you want your AI to
+											always
+											be looking for new information.</p>
+										<span class="toggle-container">
+											<label class="switch">
+												<input type="checkbox" class="toggle-switch" disabled />
+												<span class="slider round"></span>
+											</label>
+										</span>
+									</span>
+									<span>
+										<p><strong>ONE WINNER:</strong> Use this mode if you want your AI to stop
+											after
+											it makes
+											a decision.
+										</p>
+										<span class="toggle-container">
+											<label class="switch">
+												<input type="checkbox" class="toggle-switch" checked disabled />
+												<span class="slider round"></span>
+											</label>
+										</span>
+									</span>
+								</span>
+								<div id="label-container"></div>
+								<!-- here -->
+								<span class="tolerance-container">
+									<span class="popup" onclick="togglePopup('sliderPop')">
+										Inputs <img src="static/assets/images/question_filled.svg" class="help-icon"
+											alt="help icon" />
+									</span>
+									<div class="slider-container">
+										<div id="slider"></div>
+									</div>
+								</span>
+								<span class="popuptext" id="sliderPop">
+									<p>
+										This bar here helps the AI decide how sure it is in its prediction. Crank
+										the
+										bar all the way up if you want it to be absolutely sure of its decision, or
+										slide it halfway for the AI to reach a decision quicker.
+									</p>
+								</span>
+							</div>
 						</div>
-						<span id="connect-msg">🟢 Microbit Connected</span>
-						<span id="disconnect-msg">🔴 Microbit Disconnected</span>
 					</div>
 					<div class="help-dropdown">
 						<button class="small-btn GA-click" id="help-button">HELP!</button>
 						<div class="help-content">
-							<p><strong>What do these switches mean?</strong></p>
-							<span>
-								<p><strong>ALWAYS WATCHING:</strong> Use this mode if you want your AI to always be
-									looking
-									for new information.</p>
-								<span class="toggle-container">
-									<label class="switch">
-										<input type="checkbox" class="toggle-switch" disabled />
-										<span class="slider round"></span>
-									</label>
-								</span>
-							</span>
-							<span>
-								<p><strong>ONE WINNER:</strong> Use this mode if you want your AI to stop after it makes
-									a decision.
-								</p>
-								<span class="toggle-container">
-									<label class="switch">
-										<input type="checkbox" class="toggle-switch" checked disabled />
-										<span class="slider round"></span>
-									</label>
-								</span>
-							</span>
 							<p><strong>Nothing is happening to my micro:bit!</strong></p>
 							<p>
 								If you haven’t coded anything onto your micro:bit yet, well...nothing
@@ -248,8 +288,30 @@
 				</div>
 				<div class="input-container">
 					<span class="control-button">
-						<button onclick="window.location.reload(true)">Start New Project!</button>
-						<button id="closePortBtn">Disconnect Microbit</button>
+						<span class="info-popup">
+							<button id="reconnect-port">Downloaded new code? Reconnect now</button>
+							<span class="info-text" id="newCodeInfo">
+								<p>
+									2. Before you upload new makecode to your microbit, click here for instructions.
+								</p>
+								<button>Next!</button>
+							</span>
+						</span>
+						<img src="static/assets/images/info_circle.svg" alt="Info Button"
+							onclick="showInstructions()" />
+						<span class="info-popup">
+							<img src="static/assets/images/settings_filled.svg" onclick="toggleSettings(this)"
+								alt="Setting Button" />
+							<span class="info-text" id="settingsInfo">
+								<p>
+									1. Welcome to AI Judge! Click on the Settings to adjust the way your AI makes
+									predictions.
+								</p>
+								<button>Next!</button>
+							</span>
+						</span>
+						<img onclick="window.location.reload(true)" src="static/assets/images/home_fill.svg"
+							alt="Home Button" />
 					</span>
 					<div id="webcam-container" class="webcam-container"></div>
 					<div class="webcam-container"><canvas id="canvas"></canvas></div>
@@ -257,7 +319,16 @@
 						<canvas id="audioCanvas" width="400" height="400"></canvas>
 					</div>
 					<div class="log-dropdown">
-						<button class="small-btn" id="message-log">Open Message Log</button>
+						<span class="info-popup" style="width: 100%;">
+							<button class="small-btn" id="message-log">OPEN MESSAGE LOG</button>
+							<span class="info-text" id="logInfo">
+								<p>
+									3. Here is a record of all the actions your AI has done. You can use this Log to
+									troubleshot and explore!
+								</p>
+								<button>Done!</button>
+							</span>
+						</span>
 						<div class="log-content">
 							<span id="log">
 								<p class="log-paragraph" id="firstLog">Interact and your logs will show up here!</p>
@@ -267,7 +338,6 @@
 				</div>
 			</div>
 		</div>
-
 		<div id="alert-div">
 			<p id="alert-text"></p>
 			<button id="alert-ok">Ok</button>
@@ -293,12 +363,18 @@
 		<!-- Jquery -->
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"
 			integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+		<!-- Jquery UI -->
+		<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"
+			integrity="sha256-hlKLmzaRlE8SCJC1Kw8zoUbU8BxA+8kR3gseuKfMjxA=" crossorigin="anonymous"></script>
+		<!-- Canvas Confetti -->
+		<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
 		<!-- Main Scripts-->
 		<script src="/static/index.js" type="text/javascript"></script>
 		<script src="/static/scripts/serialConnection.js" type="text/javascript"></script>
 		<script src="/static/scripts/imageRec.js" type="text/javascript"></script>
 		<script src="/static/scripts/audioRec.js" type="text/javascript"></script>
 		<script src="/static/scripts/poseRec.js" type="text/javascript"></script>
+		<script src="/static/scripts/confetti.js" type="text/javascript"></script>
 	</body>
 
 </html>

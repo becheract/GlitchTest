@@ -1,5 +1,7 @@
 let model, webcam, labelContainer, maxPredictions, ctx, modelName, socketId;
+let cookie = false;
 let pageNumber = 1;
+let maxPageNum = 3;
 let ignoredClasses = [];
 let found = {
 	continous: true,
@@ -9,6 +11,8 @@ let found = {
 let heldClasses = [];
 let continous = true;
 let lastDetection = '';
+let settingsOpen = false;
+let sensitivity;
 
 const socket = io();
 // const socket = io('http://localhost:8080');
@@ -31,7 +35,7 @@ socket.on('valid-url', (valid) => {
 		$('#webcam-container').fadeOut(() => {
 			$('#canvas').fadeOut();
 			$('#label-container').fadeOut();
-			$('#results').removeClass('init-hide-imp');
+			$('#results').removeClass('hide-imp');
 			found.bool = false;
 			openPort();
 			chooseModel(teachableUrl.value);
@@ -58,6 +62,12 @@ async function chooseModel(URL) {
 	$('.projectName').text('Loading');
 	$('.projectName').addClass('loading');
 
+	if (!cookie) {
+		showInstructions();
+	} else {
+		$('#overlay').fadeIn();
+	}
+
 	if (metaName === 'tm-my-image-model') {
 		initImg();
 	} else if (metaName === 'TMv2') {
@@ -72,7 +82,8 @@ async function chooseModel(URL) {
 
 // Serial Submit to  Microbit
 function serialSubmit(classPrediction) {
-	addLog(`AI predicted ${classPrediction}`);
+	party();
+	addLog(`AI sent ${classPrediction} to the Microbit`);
 	writeToSerial(classPrediction);
 }
 
@@ -105,15 +116,6 @@ $('#label-container').on('click', '.toggle-switch', function (event) {
 	heldClasses.push(id);
 });
 
-$('#closePortBtn').click(() => {
-	closePort();
-	$('#closePortBtn').fadeOut(() => {
-		$('#connect-msg').fadeOut('slow', () => {
-			$('#disconnect-msg').fadeIn();
-		});
-	});
-});
-
 $('#help-button').click(() => {
 	$('.help-content').slideToggle();
 });
@@ -139,4 +141,117 @@ function addLog(event) {
 	} else {
 		$('#log').append(`<p class="log-paragraph"><strong>${new Date().toLocaleTimeString()}</strong>   ${event}</p><hr>`);
 	}
+}
+
+//Toggle the settings button
+function toggleSettings(el) {
+	settingsOpen = !settingsOpen;
+	el.classList.toggle('spin');
+	$('.switch, .slider-container').toggleClass('inline-block');
+	$('.check').toggleClass('hide-imp');
+	$('.popup').toggleClass('flex');
+	if (!settingsOpen) {
+		$('#results-heading').fadeOut(function () {
+			$(this).text('RESULTS!').fadeIn();
+		});
+		$('.popuptext, .settings-hidden').fadeOut();
+	} else {
+		$('#results-heading').fadeOut(function () {
+			$(this).text('SETTINGS!').fadeIn();
+			$('.settings-hidden').fadeIn();
+		});
+	}
+}
+
+// Create the cookie to expire in 30 days
+function setCookie(cname) {
+	const d = new Date();
+	d.setTime(d.getTime() + 30 * 24 * 60 * 60 * 1000);
+	let expires = 'expires=' + d.toUTCString();
+	document.cookie = cname + '=ai-training;' + expires + ';path=/';
+}
+
+// Get any available cookies
+function getCookie(cname) {
+	let name = cname + '=';
+	let ca = document.cookie.split(';');
+	for (let i = 0; i < ca.length; i++) {
+		let c = ca[i];
+		while (c.charAt(0) == ' ') {
+			c = c.substring(1);
+		}
+		if (c.indexOf(name) == 0) {
+			return c.substring(name.length, c.length);
+		}
+	}
+	return '';
+}
+
+// Check if there's relevant cookies
+function checkCookie() {
+	let user = getCookie('username');
+	if (user != '') {
+		cookie = true;
+	} else {
+		setCookie('username', user);
+	}
+}
+
+function createClasses(classes, modelLength = false) {
+	let length = modelLength || classes.length;
+	let arr = new Array(length);
+	for (let i = 0; i < length; i++) {
+		$('#label-container').append(
+			`<div class='meter' id="${
+				classes[i]
+			}"><p class='label'></p><span class='meter-container'><span><p></p></span></span><span class='toggle-container'><span class="check" ><img class="check-img" id="check-${[
+				i,
+			]}" src="static/assets/images/check_bold.svg" alt="checkmark"></span><label class="switch"><input type="checkbox" class="toggle-switch" ><span class="slider round"></span></label></span></div>`
+		);
+		arr[i] = 0;
+	}
+	return arr;
+}
+
+function togglePopup(popup) {
+	$(`#${popup}`).slideToggle();
+}
+
+$('#slider').slider({
+	range: 'min',
+	min: 0,
+	max: 100,
+	value: 15,
+	slide: function (event, ui) {
+		$('#amount').val(ui.value);
+		sensitivity = ui.value;
+		$(this).find('.ui-slider-handle').text(`${sensitivity}%`);
+	},
+	create: function (event, ui) {
+		sensitivity = $(this).slider('value');
+		$(this).find('.ui-slider-handle').text(`${sensitivity}%`);
+	},
+});
+
+// show the instruction modules
+function showInstructions() {
+	$('#overlay').fadeIn();
+	$('#settingsInfo').fadeIn(() => {
+		$('#settingsInfo button').on('click', () => {
+			$('#settingsInfo').fadeOut(() => {
+				$('#newCodeInfo').fadeIn(() => {
+					$('#newCodeInfo button').on('click', () => {
+						$('#newCodeInfo').fadeOut(() => {
+							$('#logInfo').fadeIn(() => {
+								$('#logInfo button').on('click', () => {
+									$('#overlay').hide();
+									$('#logInfo').hide();
+								});
+							});
+						});
+					});
+				});
+			});
+		});
+	});
 }

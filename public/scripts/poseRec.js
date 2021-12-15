@@ -10,7 +10,6 @@ let poseSensitivity = 15;
 async function initPose() {
 	maxPredictions = model.getTotalClasses();
 	let classLabels = model.getClassLabels();
-	poseArr = new Array(maxPredictions);
 
 	// Convenience function to setup a webcam
 	const size = 500;
@@ -28,6 +27,14 @@ async function initPose() {
 		await webcam.setup(); // request access to the webcam
 	}
 
+	$('#webcam-container').hide(() => {
+		$('.projectName').removeClass('loading');
+		$('.projectName').text('POSE MODEL');
+		$('#canvas').fadeIn();
+		$('#label-container').fadeIn();
+		$('#message-log').fadeIn();
+	});
+	if (cookie) $('#overlay').fadeOut();
 	await webcam.play();
 	window.requestAnimationFrame(poseLoop);
 
@@ -37,24 +44,13 @@ async function initPose() {
 	canvas.width = size;
 	ctx = canvas.getContext('2d');
 	labelContainer = document.getElementById('label-container');
-	for (let i = 0; i < maxPredictions; i++) {
-		// add class labels
-		$('#label-container').append(
-			`<div class='meter' id="${classLabels[i]}"><p class='label'></p><span class='meter-container'><span><p></p></span></span><span class='toggle-container'><label class="switch"><input type="checkbox" class="toggle-switch" ><span class="slider round"></span></label></span></div>`
-		);
-		poseArr[i] = 0;
-	}
-	$('#webcam-container').hide(() => {
-		$('.projectName').removeClass('loading');
-		$('.projectName').text('POSE MODEL');
-		$('#canvas').fadeIn();
-		$('#label-container').fadeIn();
-		$('#message-log').fadeIn();
-	});
+
+	//add class labels
+	poseArr = createClasses(classLabels, maxPredictions);
 }
 
 async function poseLoop(timestamp) {
-	if (continous) {
+	if (continous && !settingsOpen) {
 		if (!continous && heldClasses.length > 0) continous = false;
 
 		webcam.update(); // update the webcam frame
@@ -71,6 +67,8 @@ async function poseLoop(timestamp) {
 			if (foundPrediction.className !== lastDetection) {
 				for (let i = 0; i < poseArr.length; ++i) poseArr[i] = 0;
 				lastDetection = foundPrediction.className;
+				$$('.check-img').css('visibility', 'hidden');
+				$(`#check-${foundPrediction.foundI}`).css('visibility', 'visible');
 				serialSubmit(foundPrediction.className);
 			} else {
 				poseArr[foundPrediction.foundI] = 0;
@@ -91,13 +89,20 @@ async function posePredict() {
 	const prediction = await model.predict(posenetOutput);
 
 	for (let i = 0; i < maxPredictions; i++) {
-		labelContainer.childNodes[i].firstChild.innerHTML = prediction[i].className;
-		labelContainer.childNodes[i].childNodes[1].firstChild.style.width = `${Math.floor(prediction[i].probability * 100)}%`;
-		labelContainer.childNodes[i].childNodes[1].firstChild.firstChild.innerHTML = `${Math.floor(prediction[i].probability * 100)}%`;
+		const meter = labelContainer.childNodes[i];
+		const span = meter.childNodes[1].firstChild;
+		const percentage = Math.floor(prediction[i].probability * 100);
+
+		meter.firstChild.innerHTML = prediction[i].className;
+		span.style.width = `${percentage}%`;
+		span.firstChild.innerHTML = `${percentage}%`;
 
 		if (prediction[i].probability.toFixed(2) > 0.95) {
+			span.classList.add('threshold-color');
 			foundI = i;
 			className = prediction[i].className;
+		} else {
+			span.classList.remove('threshold-color');
 		}
 	}
 

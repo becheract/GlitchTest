@@ -10,7 +10,6 @@ let imgSensitivity = 15;
 async function initImg() {
 	maxPredictions = model.getTotalClasses();
 	let classLabels = model.getClassLabels();
-	imgArr = new Array(maxPredictions);
 
 	// Convenience function to setup a webcam
 	const flip = true; // whether to flip the webcam
@@ -34,6 +33,7 @@ async function initImg() {
 		$('#label-container').fadeIn();
 		$('#message-log').fadeIn();
 	});
+	if (cookie) $('#overlay').fadeOut();
 	await webcam.play();
 	window.requestAnimationFrame(imgLoop);
 
@@ -47,17 +47,11 @@ async function initImg() {
 	}
 
 	labelContainer = document.getElementById('label-container');
-
-	for (let i = 0; i < maxPredictions; i++) {
-		$('#label-container').append(
-			`<div class='meter' id="${classLabels[i]}"><p class='label'></p><span class='meter-container'><span><p></p></span></span><span class='toggle-container'><label class="switch"><input type="checkbox" class="toggle-switch" ><span class="slider round"></span></label></span></div>`
-		);
-		imgArr[i] = 0;
-	}
+	imgArr = createClasses(classLabels, maxPredictions);
 }
 
 async function imgLoop() {
-	if (continous) {
+	if (continous && !settingsOpen) {
 		if (!continous && heldClasses.length > 0) continous = false;
 
 		webcam.update(); // update the webcam frame
@@ -72,6 +66,8 @@ async function imgLoop() {
 			if (foundPrediction.className !== lastDetection) {
 				for (let i = 0; i < imgArr.length; ++i) imgArr[i] = 0;
 				lastDetection = foundPrediction.className;
+				$('.check-img').css('visibility', 'hidden');
+				$(`#check-${foundPrediction.foundI}`).css('visibility', 'visible');
 				serialSubmit(foundPrediction.className);
 			} else {
 				imgArr[foundPrediction.foundI] = 0;
@@ -89,13 +85,20 @@ async function ImgPredict() {
 	const prediction = await model.predict(webcam.canvas);
 
 	for (let i = 0; i < maxPredictions; i++) {
-		labelContainer.childNodes[i].firstChild.innerHTML = prediction[i].className;
-		labelContainer.childNodes[i].childNodes[1].firstChild.style.width = `${Math.floor(prediction[i].probability * 100)}%`;
-		labelContainer.childNodes[i].childNodes[1].firstChild.firstChild.innerHTML = `${Math.floor(prediction[i].probability * 100)}%`;
+		const meter = labelContainer.childNodes[i];
+		const span = meter.childNodes[1].firstChild;
+		const percentage = Math.floor(prediction[i].probability * 100);
+
+		meter.firstChild.innerHTML = prediction[i].className;
+		span.style.width = `${percentage}%`;
+		span.firstChild.innerHTML = `${percentage}%`;
 
 		if (prediction[i].probability.toFixed(2) > 0.94) {
+			span.classList.add('threshold-color');
 			foundI = i;
 			className = prediction[i].className;
+		} else {
+			span.classList.remove('threshold-color');
 		}
 	}
 	return { foundI: foundI, className: className };
