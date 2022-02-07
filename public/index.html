@@ -30,7 +30,7 @@
 
 		<!-- import the webpage's stylesheet -->
 		<link rel="stylesheet" href="/static/styles/index.css" />
-		<script src="https://button.glitch.me/button.js" data-style="glitch"></script>
+		<link rel="icon" type="image/x-icon" href="/static/assets/favicon.ico">
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,700;0,800;1,400&display=swap"
@@ -38,6 +38,7 @@
 
 		<!-- Jquery Styles -->
 		<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+		<script src="https://button.glitch.me/button.js" data-style="glitch"></script>
 	</head>
 
 	<body onload="checkCookie()">
@@ -45,11 +46,12 @@
 		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WF39LXQ" height="0" width="0"
 				style="display:none;visibility:hidden"></iframe></noscript>
 		<!-- End Google Tag Manager (noscript) -->
-
+		<div id='desktop-only'>
+			<h2>This Application is best used with a Desktop</h2>
+		</div>
 		<div id="page-1">
 			<div class="page-container">
 				<div class="sctn">
-					<p class="sub-title">Welcome to the</p>
 					<h1 class="title">A Micro:bit of AI</h1>
 					<p class="paragraph">
 						This site will help bridge the gap between the Teachable Machine AI and a micro:bit giving
@@ -68,7 +70,7 @@
 					</span>
 				</div>
 				<div class="sctn img-sctn"></div>
-				<img src="static/assets/images/microbit.png" class="microbit-img" alt="Microbit.png" />
+				<img src="static/assets/images/microbit_yellow.png" class="microbit-img" alt="Microbit.png" />
 			</div>
 			<div class="page-bottom">
 				<span>
@@ -129,6 +131,22 @@
 						book. -->
 					</p>
 					<!-- <span class='btn-cont'> <a href="" target="_blank"><button>Read AI Robots Book</button></a></span> -->
+				</span>
+			</div>
+			<div class="video-section">
+				<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Lx0l5U-vVk4"
+					title="YouTube video player" frameborder="0"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+					allowfullscreen>
+				</iframe>
+				<span>
+					<p class="paragraph des-title">micro:bit LIVE 2021 Presentation</p>
+					<p class="description main-des">
+						We had the pleasure of presenting this web platform at the <strong>micro:bit LIVE 2021</strong>
+						conference to showcase the projects we
+						have developed with our friends at <strong>Strawbees</strong> in Sweden and the <strong>Teknisk
+							Museum</strong> in Norway!
+					</p>
 				</span>
 			</div>
 		</div>
@@ -300,8 +318,11 @@
 						<img src="static/assets/images/info_circle.svg" alt="Info Button"
 							onclick="showInstructions()" />
 						<span class="info-popup">
-							<img src="static/assets/images/settings_filled.svg" onclick="toggleSettings(this)"
-								alt="Setting Button" />
+							<div class="settings">
+								<img src="static/assets/images/settings_filled.svg" onclick="toggleSettings(this)"
+									alt="Setting Button" />
+								<span class="settings-tooltip">Open Settings</span>
+							</div>
 							<span class="info-text" id="settingsInfo">
 								<p>
 									1. Welcome to AI Judge! Click on the Settings to adjust the way your AI makes

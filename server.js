@@ -20,6 +20,7 @@ const { execSync } = require('child_process');
 
 let timeStamps = [];
 
+// Automatic
 app.post('/git', (req, res) => {
 	const hmac = crypto.createHmac('sha1', process.env.SECRET);
 	const sig = 'sha1=' + hmac.update(JSON.stringify(req.body)).digest('hex');
@@ -47,10 +48,14 @@ app.post('/git', (req, res) => {
 app.use('/static', express.static(path.join(__dirname, 'public')));
 
 app.get('/', function (req, res) {
+	// Redirect to secure protocol if on insecure connection
+	if (process.env.NODE_ENV == 'production' && req.get('X-Forwarded-Proto').indexOf('https') == -1) {
+		res.redirect('https://' + req.hostname + req.url);
+	}
 	res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
-server.listen(process.env.PORT || 8080, () => console.log('Server started'));
+server.listen(process.env.PORT || 80, () => console.log('Server started'));
 
 function validURL(str) {
 	var pattern = new RegExp(

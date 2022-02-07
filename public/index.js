@@ -31,7 +31,7 @@ submitUrl.onclick = () => {
 };
 
 socket.on('valid-url', (valid) => {
-	if (valid) {
+	if (valid && window.innerWidth > 900) {
 		$('#webcam-container').fadeOut(() => {
 			$('#canvas').fadeOut();
 			$('#label-container').fadeOut();
@@ -151,11 +151,13 @@ function toggleSettings(el) {
 	$('.check').toggleClass('hide-imp');
 	$('.popup').toggleClass('flex');
 	if (!settingsOpen) {
+		$('.settings-tooltip').text('Open Settings');
 		$('#results-heading').fadeOut(function () {
 			$(this).text('RESULTS!').fadeIn();
 		});
 		$('.popuptext, .settings-hidden').fadeOut();
 	} else {
+		$('.settings-tooltip').text('Close Settings');
 		$('#results-heading').fadeOut(function () {
 			$(this).text('SETTINGS!').fadeIn();
 			$('.settings-hidden').fadeIn();

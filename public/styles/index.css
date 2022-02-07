@@ -9,7 +9,7 @@ body {
   background-color: #f0f0f0;
 }
 
-h1 {
+h1:not(.title) {
   font-size: 4rem;
   color: #000 !important;
 }
@@ -52,6 +52,10 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
 
 /* Standard Elements: End */
 /* Document Wide: Start */
+#desktop-only {
+  display: none;
+}
+
 #overlay {
   position: fixed;
   /* Sit on top of the page content */
@@ -236,6 +240,41 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
   border-color: #000 transparent transparent transparent;
 }
 
+.settings {
+  position: relative;
+  display: inline-block;
+}
+
+.settings .settings-tooltip {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.settings .settings-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+.settings:hover .settings-tooltip {
+  visibility: visible;
+}
+
 .info-text,
 .popuptext {
   background-color: #ffe7ba;
@@ -272,10 +311,6 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
   cursor: default;
 }
 
-#page-1 {
-  padding: 3em 2em 2em;
-}
-
 #page-3 {
   padding: 1em;
 }
@@ -287,7 +322,7 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
 /* Document Wide: End */
 /* Page One: Start*/
 #page-1 {
-  background-color: #faaf3f;
+  background-color: #9dcddf;
   width: 100%;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -303,8 +338,9 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
 }
 
 #page-1 .title {
+  color: #fff;
   text-transform: uppercase;
-  text-shadow: 3px 3px #fff;
+  text-shadow: 6px 6px #000;
   font-size: 5.5rem;
   text-align: left;
   margin: 0px 0 60px;
@@ -324,6 +360,7 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  padding: 3em 3em 2em;
 }
 
 #page-1 .page-container .sctn {
@@ -363,6 +400,7 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;
+  background-color: #ffda95;
 }
 
 #page-1 .page-container .sctn .btn-container #requestPortButton h1 {
@@ -403,6 +441,9 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
   display: flex;
   -ms-flex-pack: distribute;
       justify-content: space-around;
+  margin: 3em 2em 2em;
+  position: relative;
+  z-index: 2;
 }
 
 #page-1 .page-bottom span {
@@ -431,6 +472,29 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
 
 #page-1 .page-bottom span .main-des {
   min-height: 150px;
+}
+
+#page-1 .video-section {
+  background-color: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 600px;
+  padding: 100px 50px;
+  position: relative;
+  top: -100px;
+}
+
+#page-1 .video-section span {
+  width: 30%;
 }
 
 /* Page One: End*/
@@ -758,516 +822,516 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(0) {
-  top: 14px !important;
+  top: 6px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 3px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 1.35s linear infinite, final 0.2s 4s forwards, spot-0 0.7s 0.4/random 20.4s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.2s 1.35s linear infinite, final 0.2s 4s forwards, spot-0 0.7s 0.4/random 20.4s linear infinite !important;
+  padding: 5.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 0.75s linear infinite, final 0.2s 4s forwards, spot-0 0.7s 0.4/random 20.9s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 0.75s linear infinite, final 0.2s 4s forwards, spot-0 0.7s 0.4/random 20.9s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(1) {
-  top: 13px !important;
-  left: -34px !important;
-  opacity: 0;
-  padding: 3.5px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 1.35s linear infinite, final 0.2s 4s forwards, spot-1 0.7s 0.4/random 20.8s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.2s 1.35s linear infinite, final 0.2s 4s forwards, spot-1 0.7s 0.4/random 20.8s linear infinite !important;
-}
-
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(2) {
-  top: 15px !important;
-  left: -34px !important;
-  opacity: 0;
-  padding: 3.25px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 0.45s linear infinite, final 0.2s 4s forwards, spot-2 0.7s 0.4/random 20.1s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.1s 0.45s linear infinite, final 0.2s 4s forwards, spot-2 0.7s 0.4/random 20.1s linear infinite !important;
-}
-
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(3) {
-  top: 14px !important;
-  left: -34px !important;
-  opacity: 0;
-  padding: 2.5px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 0.45s linear infinite, final 0.2s 4s forwards, spot-3 0.7s 0.4/random 20.9s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.3s 0.45s linear infinite, final 0.2s 4s forwards, spot-3 0.7s 0.4/random 20.9s linear infinite !important;
-}
-
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(4) {
-  top: 7px !important;
-  left: -34px !important;
-  opacity: 0;
-  padding: 6px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 1.35s linear infinite, final 0.2s 4s forwards, spot-4 0.7s 0.4/random 20.4s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.2s 1.35s linear infinite, final 0.2s 4s forwards, spot-4 0.7s 0.4/random 20.4s linear infinite !important;
-}
-
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(5) {
   top: 10px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 3.75px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 1.05s linear infinite, final 0.2s 4s forwards, spot-5 0.7s 0.4/random 20.5s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.2s 1.05s linear infinite, final 0.2s 4s forwards, spot-5 0.7s 0.4/random 20.5s linear infinite !important;
+  padding: 6.5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 0.75s linear infinite, final 0.2s 4s forwards, spot-1 0.7s 0.4/random 20.4s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.1s 0.75s linear infinite, final 0.2s 4s forwards, spot-1 0.7s 0.4/random 20.4s linear infinite !important;
 }
 
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(6) {
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(2) {
   top: 7px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 2.5px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 1.25s linear infinite, final 0.2s 4s forwards, spot-6 0.7s 0.4/random 21s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.1s 1.25s linear infinite, final 0.2s 4s forwards, spot-6 0.7s 0.4/random 21s linear infinite !important;
+  padding: 7px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 1.05s linear infinite, final 0.2s 4s forwards, spot-2 0.7s 0.4/random 20.6s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 1.05s linear infinite, final 0.2s 4s forwards, spot-2 0.7s 0.4/random 20.6s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(3) {
+  top: 7px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 6.75px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 0.75s linear infinite, final 0.2s 4s forwards, spot-3 0.7s 0.4/random 20.1s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 0.75s linear infinite, final 0.2s 4s forwards, spot-3 0.7s 0.4/random 20.1s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(4) {
+  top: 14px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 4.75px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 0.95s linear infinite, final 0.2s 4s forwards, spot-4 0.7s 0.4/random 20.9s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.3s 0.95s linear infinite, final 0.2s 4s forwards, spot-4 0.7s 0.4/random 20.9s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(5) {
+  top: 11px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 4px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.95s linear infinite, final 0.2s 4s forwards, spot-5 0.7s 0.4/random 20.4s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 0.95s linear infinite, final 0.2s 4s forwards, spot-5 0.7s 0.4/random 20.4s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(6) {
+  top: 15px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 4.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 0.55s linear infinite, final 0.2s 4s forwards, spot-6 0.7s 0.4/random 20.9s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.1s 0.55s linear infinite, final 0.2s 4s forwards, spot-6 0.7s 0.4/random 20.9s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(7) {
   top: 7px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 6.25px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 0.55s linear infinite, final 0.2s 4s forwards, spot-7 0.7s 0.4/random 21s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.1s 0.55s linear infinite, final 0.2s 4s forwards, spot-7 0.7s 0.4/random 21s linear infinite !important;
+  padding: 4.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 0.75s linear infinite, final 0.2s 4s forwards, spot-7 0.7s 0.4/random 20.9s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 0.75s linear infinite, final 0.2s 4s forwards, spot-7 0.7s 0.4/random 20.9s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(8) {
-  top: 7px !important;
+  top: 11px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 4px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 1.35s linear infinite, final 0.2s 4s forwards, spot-8 0.7s 0.4/random 20.2s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.4s 1.35s linear infinite, final 0.2s 4s forwards, spot-8 0.7s 0.4/random 20.2s linear infinite !important;
+  padding: 6px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 0.65s linear infinite, final 0.2s 4s forwards, spot-8 0.7s 0.4/random 20.7s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.3s 0.65s linear infinite, final 0.2s 4s forwards, spot-8 0.7s 0.4/random 20.7s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(9) {
-  top: 11px !important;
+  top: 10px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 3.5px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 1.45s linear infinite, final 0.2s 4s forwards, spot-9 0.7s 0.4/random 20.4s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.4s 1.45s linear infinite, final 0.2s 4s forwards, spot-9 0.7s 0.4/random 20.4s linear infinite !important;
+  padding: 2.75px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 0.45s linear infinite, final 0.2s 4s forwards, spot-9 0.7s 0.4/random 20.1s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 0.45s linear infinite, final 0.2s 4s forwards, spot-9 0.7s 0.4/random 20.1s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(10) {
-  top: 8px !important;
+  top: 14px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 4.75px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 0.35s linear infinite, final 0.2s 4s forwards, spot-10 0.7s 0.4/random 21s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.4s 0.35s linear infinite, final 0.2s 4s forwards, spot-10 0.7s 0.4/random 21s linear infinite !important;
+  padding: 6.75px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 0.45s linear infinite, final 0.2s 4s forwards, spot-10 0.7s 0.4/random 20.7s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 0.45s linear infinite, final 0.2s 4s forwards, spot-10 0.7s 0.4/random 20.7s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(11) {
-  top: 11px !important;
+  top: 10px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 4.5px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 1.35s linear infinite, final 0.2s 4s forwards, spot-11 0.7s 0.4/random 20.8s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.3s 1.35s linear infinite, final 0.2s 4s forwards, spot-11 0.7s 0.4/random 20.8s linear infinite !important;
+  padding: 3.75px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.75s linear infinite, final 0.2s 4s forwards, spot-11 0.7s 0.4/random 20.4s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 0.75s linear infinite, final 0.2s 4s forwards, spot-11 0.7s 0.4/random 20.4s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(12) {
-  top: 15px !important;
+  top: 14px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 3px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 1.45s linear infinite, final 0.2s 4s forwards, spot-12 0.7s 0.4/random 20.6s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.3s 1.45s linear infinite, final 0.2s 4s forwards, spot-12 0.7s 0.4/random 20.6s linear infinite !important;
+  padding: 3.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 0.85s linear infinite, final 0.2s 4s forwards, spot-12 0.7s 0.4/random 20.2s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.3s 0.85s linear infinite, final 0.2s 4s forwards, spot-12 0.7s 0.4/random 20.2s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(13) {
-  top: 10px !important;
+  top: 15px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 3.5px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 1.15s linear infinite, final 0.2s 4s forwards, spot-13 0.7s 0.4/random 20.3s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.4s 1.15s linear infinite, final 0.2s 4s forwards, spot-13 0.7s 0.4/random 20.3s linear infinite !important;
+  padding: 4.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 1.45s linear infinite, final 0.2s 4s forwards, spot-13 0.7s 0.4/random 20.4s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 1.45s linear infinite, final 0.2s 4s forwards, spot-13 0.7s 0.4/random 20.4s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(14) {
-  top: 10px !important;
+  top: 8px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 3.5px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 1.05s linear infinite, final 0.2s 4s forwards, spot-14 0.7s 0.4/random 20.8s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.1s 1.05s linear infinite, final 0.2s 4s forwards, spot-14 0.7s 0.4/random 20.8s linear infinite !important;
+  padding: 5.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 0.65s linear infinite, final 0.2s 4s forwards, spot-14 0.7s 0.4/random 20.1s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 0.65s linear infinite, final 0.2s 4s forwards, spot-14 0.7s 0.4/random 20.1s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(15) {
-  top: 11px !important;
+  top: 14px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 6.25px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 0.85s linear infinite, final 0.2s 4s forwards, spot-15 0.7s 0.4/random 20.1s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.1s 0.85s linear infinite, final 0.2s 4s forwards, spot-15 0.7s 0.4/random 20.1s linear infinite !important;
+  padding: 5.5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 1.45s linear infinite, final 0.2s 4s forwards, spot-15 0.7s 0.4/random 20.8s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.1s 1.45s linear infinite, final 0.2s 4s forwards, spot-15 0.7s 0.4/random 20.8s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(16) {
   top: 9px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 5.5px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.45s linear infinite, final 0.2s 4s forwards, spot-16 0.7s 0.4/random 20.1s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.2s 0.45s linear infinite, final 0.2s 4s forwards, spot-16 0.7s 0.4/random 20.1s linear infinite !important;
+  padding: 3.75px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 0.95s linear infinite, final 0.2s 4s forwards, spot-16 0.7s 0.4/random 20.8s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 0.95s linear infinite, final 0.2s 4s forwards, spot-16 0.7s 0.4/random 20.8s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(17) {
-  top: 13px !important;
+  top: 11px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 3.25px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 0.75s linear infinite, final 0.2s 4s forwards, spot-17 0.7s 0.4/random 21s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.3s 0.75s linear infinite, final 0.2s 4s forwards, spot-17 0.7s 0.4/random 21s linear infinite !important;
+  padding: 6px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.55s linear infinite, final 0.2s 4s forwards, spot-17 0.7s 0.4/random 20.3s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 0.55s linear infinite, final 0.2s 4s forwards, spot-17 0.7s 0.4/random 20.3s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(18) {
-  top: 15px !important;
+  top: 14px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 4.75px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 1.25s linear infinite, final 0.2s 4s forwards, spot-18 0.7s 0.4/random 20.3s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.4s 1.25s linear infinite, final 0.2s 4s forwards, spot-18 0.7s 0.4/random 20.3s linear infinite !important;
+  padding: 5.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 1.05s linear infinite, final 0.2s 4s forwards, spot-18 0.7s 0.4/random 20.4s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 1.05s linear infinite, final 0.2s 4s forwards, spot-18 0.7s 0.4/random 20.4s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(19) {
-  top: 15px !important;
+  top: 6px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 6.75px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 1.25s linear infinite, final 0.2s 4s forwards, spot-19 0.7s 0.4/random 20.2s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.4s 1.25s linear infinite, final 0.2s 4s forwards, spot-19 0.7s 0.4/random 20.2s linear infinite !important;
+  padding: 6px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.45s linear infinite, final 0.2s 4s forwards, spot-19 0.7s 0.4/random 20.4s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 0.45s linear infinite, final 0.2s 4s forwards, spot-19 0.7s 0.4/random 20.4s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(20) {
-  top: 9px !important;
+  top: 14px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 6.75px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.35s linear infinite, final 0.2s 4s forwards, spot-20 0.7s 0.4/random 20.7s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.2s 0.35s linear infinite, final 0.2s 4s forwards, spot-20 0.7s 0.4/random 20.7s linear infinite !important;
+  padding: 5.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 1.05s linear infinite, final 0.2s 4s forwards, spot-20 0.7s 0.4/random 20.2s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.1s 1.05s linear infinite, final 0.2s 4s forwards, spot-20 0.7s 0.4/random 20.2s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(21) {
-  top: 8px !important;
+  top: 6px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 4.5px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 0.75s linear infinite, final 0.2s 4s forwards, spot-21 0.7s 0.4/random 20.7s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.1s 0.75s linear infinite, final 0.2s 4s forwards, spot-21 0.7s 0.4/random 20.7s linear infinite !important;
+  padding: 2.5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 0.35s linear infinite, final 0.2s 4s forwards, spot-21 0.7s 0.4/random 20.3s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 0.35s linear infinite, final 0.2s 4s forwards, spot-21 0.7s 0.4/random 20.3s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(22) {
-  top: 12px !important;
+  top: 13px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 3.25px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.45s linear infinite, final 0.2s 4s forwards, spot-22 0.7s 0.4/random 20.9s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.2s 0.45s linear infinite, final 0.2s 4s forwards, spot-22 0.7s 0.4/random 20.9s linear infinite !important;
+  padding: 5.5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 0.65s linear infinite, final 0.2s 4s forwards, spot-22 0.7s 0.4/random 20.3s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 0.65s linear infinite, final 0.2s 4s forwards, spot-22 0.7s 0.4/random 20.3s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(23) {
-  top: 8px !important;
+  top: 10px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 4.5px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 0.85s linear infinite, final 0.2s 4s forwards, spot-23 0.7s 0.4/random 20.7s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.1s 0.85s linear infinite, final 0.2s 4s forwards, spot-23 0.7s 0.4/random 20.7s linear infinite !important;
+  padding: 4.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 1.35s linear infinite, final 0.2s 4s forwards, spot-23 0.7s 0.4/random 20.9s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.3s 1.35s linear infinite, final 0.2s 4s forwards, spot-23 0.7s 0.4/random 20.9s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(24) {
   top: 9px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 7px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 0.55s linear infinite, final 0.2s 4s forwards, spot-24 0.7s 0.4/random 20.2s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.3s 0.55s linear infinite, final 0.2s 4s forwards, spot-24 0.7s 0.4/random 20.2s linear infinite !important;
+  padding: 6.75px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.45s linear infinite, final 0.2s 4s forwards, spot-24 0.7s 0.4/random 21s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 0.45s linear infinite, final 0.2s 4s forwards, spot-24 0.7s 0.4/random 21s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(25) {
-  top: 8px !important;
-  left: -34px !important;
-  opacity: 0;
-  padding: 2.25px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 0.75s linear infinite, final 0.2s 4s forwards, spot-25 0.7s 0.4/random 20.9s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.3s 0.75s linear infinite, final 0.2s 4s forwards, spot-25 0.7s 0.4/random 20.9s linear infinite !important;
-}
-
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(26) {
-  top: 11px !important;
-  left: -34px !important;
-  opacity: 0;
-  padding: 4.75px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 1.25s linear infinite, final 0.2s 4s forwards, spot-26 0.7s 0.4/random 20.7s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.3s 1.25s linear infinite, final 0.2s 4s forwards, spot-26 0.7s 0.4/random 20.7s linear infinite !important;
-}
-
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(27) {
-  top: 15px !important;
-  left: -34px !important;
-  opacity: 0;
-  padding: 3.25px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 1.05s linear infinite, final 0.2s 4s forwards, spot-27 0.7s 0.4/random 20.1s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.1s 1.05s linear infinite, final 0.2s 4s forwards, spot-27 0.7s 0.4/random 20.1s linear infinite !important;
-}
-
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(28) {
-  top: 10px !important;
-  left: -34px !important;
-  opacity: 0;
-  padding: 3.25px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 1.05s linear infinite, final 0.2s 4s forwards, spot-28 0.7s 0.4/random 20.1s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.3s 1.05s linear infinite, final 0.2s 4s forwards, spot-28 0.7s 0.4/random 20.1s linear infinite !important;
-}
-
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(29) {
-  top: 9px !important;
-  left: -34px !important;
-  opacity: 0;
-  padding: 6px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 0.85s linear infinite, final 0.2s 4s forwards, spot-29 0.7s 0.4/random 20.6s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.1s 0.85s linear infinite, final 0.2s 4s forwards, spot-29 0.7s 0.4/random 20.6s linear infinite !important;
-}
-
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(30) {
-  top: 12px !important;
-  left: -34px !important;
-  opacity: 0;
-  padding: 4.25px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 1.45s linear infinite, final 0.2s 4s forwards, spot-30 0.7s 0.4/random 20.1s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.3s 1.45s linear infinite, final 0.2s 4s forwards, spot-30 0.7s 0.4/random 20.1s linear infinite !important;
-}
-
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(31) {
-  top: 7px !important;
-  left: -34px !important;
-  opacity: 0;
-  padding: 3.25px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.75s linear infinite, final 0.2s 4s forwards, spot-31 0.7s 0.4/random 21s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.2s 0.75s linear infinite, final 0.2s 4s forwards, spot-31 0.7s 0.4/random 21s linear infinite !important;
-}
-
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(32) {
-  top: 6px !important;
-  left: -34px !important;
-  opacity: 0;
-  padding: 2.75px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 0.85s linear infinite, final 0.2s 4s forwards, spot-32 0.7s 0.4/random 20.3s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.3s 0.85s linear infinite, final 0.2s 4s forwards, spot-32 0.7s 0.4/random 20.3s linear infinite !important;
-}
-
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(33) {
-  top: 6px !important;
-  left: -34px !important;
-  opacity: 0;
-  padding: 6.5px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 1.15s linear infinite, final 0.2s 4s forwards, spot-33 0.7s 0.4/random 20.1s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.2s 1.15s linear infinite, final 0.2s 4s forwards, spot-33 0.7s 0.4/random 20.1s linear infinite !important;
-}
-
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(34) {
-  top: 11px !important;
-  left: -34px !important;
-  opacity: 0;
-  padding: 2.75px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.55s linear infinite, final 0.2s 4s forwards, spot-34 0.7s 0.4/random 20.4s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.2s 0.55s linear infinite, final 0.2s 4s forwards, spot-34 0.7s 0.4/random 20.4s linear infinite !important;
-}
-
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(35) {
-  top: 9px !important;
-  left: -34px !important;
-  opacity: 0;
-  padding: 2.75px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 1.35s linear infinite, final 0.2s 4s forwards, spot-35 0.7s 0.4/random 20.8s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.1s 1.35s linear infinite, final 0.2s 4s forwards, spot-35 0.7s 0.4/random 20.8s linear infinite !important;
-}
-
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(36) {
-  top: 9px !important;
-  left: -34px !important;
-  opacity: 0;
-  padding: 4px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 0.75s linear infinite, final 0.2s 4s forwards, spot-36 0.7s 0.4/random 20.2s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.1s 0.75s linear infinite, final 0.2s 4s forwards, spot-36 0.7s 0.4/random 20.2s linear infinite !important;
-}
-
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(37) {
-  top: 10px !important;
-  left: -34px !important;
-  opacity: 0;
-  padding: 6.5px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.55s linear infinite, final 0.2s 4s forwards, spot-37 0.7s 0.4/random 20.9s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.2s 0.55s linear infinite, final 0.2s 4s forwards, spot-37 0.7s 0.4/random 20.9s linear infinite !important;
-}
-
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(38) {
   top: 13px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 3.5px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.85s linear infinite, final 0.2s 4s forwards, spot-38 0.7s 0.4/random 21s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.2s 0.85s linear infinite, final 0.2s 4s forwards, spot-38 0.7s 0.4/random 21s linear infinite !important;
+  padding: 3.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 0.45s linear infinite, final 0.2s 4s forwards, spot-25 0.7s 0.4/random 20.7s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.1s 0.45s linear infinite, final 0.2s 4s forwards, spot-25 0.7s 0.4/random 20.7s linear infinite !important;
 }
 
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(39) {
-  top: 7px !important;
-  left: -34px !important;
-  opacity: 0;
-  padding: 4.25px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 0.85s linear infinite, final 0.2s 4s forwards, spot-39 0.7s 0.4/random 20.8s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.4s 0.85s linear infinite, final 0.2s 4s forwards, spot-39 0.7s 0.4/random 20.8s linear infinite !important;
-}
-
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(40) {
-  top: 14px !important;
-  left: -34px !important;
-  opacity: 0;
-  padding: 6.25px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 1.25s linear infinite, final 0.2s 4s forwards, spot-40 0.7s 0.4/random 20.4s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.1s 1.25s linear infinite, final 0.2s 4s forwards, spot-40 0.7s 0.4/random 20.4s linear infinite !important;
-}
-
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(41) {
-  top: 6px !important;
-  left: -34px !important;
-  opacity: 0;
-  padding: 2.25px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 0.95s linear infinite, final 0.2s 4s forwards, spot-41 0.7s 0.4/random 21s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.1s 0.95s linear infinite, final 0.2s 4s forwards, spot-41 0.7s 0.4/random 21s linear infinite !important;
-}
-
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(42) {
-  top: 15px !important;
-  left: -34px !important;
-  opacity: 0;
-  padding: 6.25px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 0.65s linear infinite, final 0.2s 4s forwards, spot-42 0.7s 0.4/random 20.6s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.3s 0.65s linear infinite, final 0.2s 4s forwards, spot-42 0.7s 0.4/random 20.6s linear infinite !important;
-}
-
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(43) {
-  top: 7px !important;
-  left: -34px !important;
-  opacity: 0;
-  padding: 2.75px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.35s linear infinite, final 0.2s 4s forwards, spot-43 0.7s 0.4/random 20.2s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.2s 0.35s linear infinite, final 0.2s 4s forwards, spot-43 0.7s 0.4/random 20.2s linear infinite !important;
-}
-
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(44) {
-  top: 6px !important;
-  left: -34px !important;
-  opacity: 0;
-  padding: 6.75px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.65s linear infinite, final 0.2s 4s forwards, spot-44 0.7s 0.4/random 20.6s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.2s 0.65s linear infinite, final 0.2s 4s forwards, spot-44 0.7s 0.4/random 20.6s linear infinite !important;
-}
-
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(45) {
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(26) {
   top: 12px !important;
   left: -34px !important;
   opacity: 0;
   padding: 6px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 0.55s linear infinite, final 0.2s 4s forwards, spot-45 0.7s 0.4/random 20.9s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.4s 0.55s linear infinite, final 0.2s 4s forwards, spot-45 0.7s 0.4/random 20.9s linear infinite !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 0.95s linear infinite, final 0.2s 4s forwards, spot-26 0.7s 0.4/random 20.6s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.1s 0.95s linear infinite, final 0.2s 4s forwards, spot-26 0.7s 0.4/random 20.6s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(27) {
+  top: 8px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 6.75px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 0.55s linear infinite, final 0.2s 4s forwards, spot-27 0.7s 0.4/random 20.8s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.3s 0.55s linear infinite, final 0.2s 4s forwards, spot-27 0.7s 0.4/random 20.8s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(28) {
+  top: 12px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 4px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.65s linear infinite, final 0.2s 4s forwards, spot-28 0.7s 0.4/random 20.9s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 0.65s linear infinite, final 0.2s 4s forwards, spot-28 0.7s 0.4/random 20.9s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(29) {
+  top: 11px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 4.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.45s linear infinite, final 0.2s 4s forwards, spot-29 0.7s 0.4/random 20.9s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 0.45s linear infinite, final 0.2s 4s forwards, spot-29 0.7s 0.4/random 20.9s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(30) {
+  top: 7px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 0.35s linear infinite, final 0.2s 4s forwards, spot-30 0.7s 0.4/random 20.4s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.1s 0.35s linear infinite, final 0.2s 4s forwards, spot-30 0.7s 0.4/random 20.4s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(31) {
+  top: 13px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 6px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 1.15s linear infinite, final 0.2s 4s forwards, spot-31 0.7s 0.4/random 20.5s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.1s 1.15s linear infinite, final 0.2s 4s forwards, spot-31 0.7s 0.4/random 20.5s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(32) {
+  top: 10px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 6px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 0.65s linear infinite, final 0.2s 4s forwards, spot-32 0.7s 0.4/random 21s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.1s 0.65s linear infinite, final 0.2s 4s forwards, spot-32 0.7s 0.4/random 21s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(33) {
+  top: 15px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 6.5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 1.15s linear infinite, final 0.2s 4s forwards, spot-33 0.7s 0.4/random 20.8s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 1.15s linear infinite, final 0.2s 4s forwards, spot-33 0.7s 0.4/random 20.8s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(34) {
+  top: 6px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 6.5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 0.35s linear infinite, final 0.2s 4s forwards, spot-34 0.7s 0.4/random 20.4s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.3s 0.35s linear infinite, final 0.2s 4s forwards, spot-34 0.7s 0.4/random 20.4s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(35) {
+  top: 15px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 4.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 0.35s linear infinite, final 0.2s 4s forwards, spot-35 0.7s 0.4/random 20.3s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 0.35s linear infinite, final 0.2s 4s forwards, spot-35 0.7s 0.4/random 20.3s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(36) {
+  top: 6px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 5.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 0.95s linear infinite, final 0.2s 4s forwards, spot-36 0.7s 0.4/random 20.8s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.3s 0.95s linear infinite, final 0.2s 4s forwards, spot-36 0.7s 0.4/random 20.8s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(37) {
+  top: 14px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 4.75px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 1.05s linear infinite, final 0.2s 4s forwards, spot-37 0.7s 0.4/random 20.9s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 1.05s linear infinite, final 0.2s 4s forwards, spot-37 0.7s 0.4/random 20.9s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(38) {
+  top: 15px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 6.5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 0.35s linear infinite, final 0.2s 4s forwards, spot-38 0.7s 0.4/random 20.7s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.3s 0.35s linear infinite, final 0.2s 4s forwards, spot-38 0.7s 0.4/random 20.7s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(39) {
+  top: 9px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 0.85s linear infinite, final 0.2s 4s forwards, spot-39 0.7s 0.4/random 20.2s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 0.85s linear infinite, final 0.2s 4s forwards, spot-39 0.7s 0.4/random 20.2s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(40) {
+  top: 9px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 2.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.55s linear infinite, final 0.2s 4s forwards, spot-40 0.7s 0.4/random 20.7s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 0.55s linear infinite, final 0.2s 4s forwards, spot-40 0.7s 0.4/random 20.7s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(41) {
+  top: 8px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 4.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 0.35s linear infinite, final 0.2s 4s forwards, spot-41 0.7s 0.4/random 20.8s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.3s 0.35s linear infinite, final 0.2s 4s forwards, spot-41 0.7s 0.4/random 20.8s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(42) {
+  top: 11px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 6.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 0.85s linear infinite, final 0.2s 4s forwards, spot-42 0.7s 0.4/random 20.3s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.1s 0.85s linear infinite, final 0.2s 4s forwards, spot-42 0.7s 0.4/random 20.3s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(43) {
+  top: 6px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 5.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 0.55s linear infinite, final 0.2s 4s forwards, spot-43 0.7s 0.4/random 20.5s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 0.55s linear infinite, final 0.2s 4s forwards, spot-43 0.7s 0.4/random 20.5s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(44) {
+  top: 10px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 4.75px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 0.95s linear infinite, final 0.2s 4s forwards, spot-44 0.7s 0.4/random 20.3s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 0.95s linear infinite, final 0.2s 4s forwards, spot-44 0.7s 0.4/random 20.3s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(45) {
+  top: 9px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 2.5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 0.35s linear infinite, final 0.2s 4s forwards, spot-45 0.7s 0.4/random 20.4s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.1s 0.35s linear infinite, final 0.2s 4s forwards, spot-45 0.7s 0.4/random 20.4s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(46) {
   top: 9px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 5px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 0.85s linear infinite, final 0.2s 4s forwards, spot-46 0.7s 0.4/random 20.8s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.3s 0.85s linear infinite, final 0.2s 4s forwards, spot-46 0.7s 0.4/random 20.8s linear infinite !important;
+  padding: 6.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.95s linear infinite, final 0.2s 4s forwards, spot-46 0.7s 0.4/random 20.1s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 0.95s linear infinite, final 0.2s 4s forwards, spot-46 0.7s 0.4/random 20.1s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(47) {
-  top: 7px !important;
+  top: 8px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 7px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 1.45s linear infinite, final 0.2s 4s forwards, spot-47 0.7s 0.4/random 20.5s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.1s 1.45s linear infinite, final 0.2s 4s forwards, spot-47 0.7s 0.4/random 20.5s linear infinite !important;
+  padding: 6.75px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 1.45s linear infinite, final 0.2s 4s forwards, spot-47 0.7s 0.4/random 20.9s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.1s 1.45s linear infinite, final 0.2s 4s forwards, spot-47 0.7s 0.4/random 20.9s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(48) {
-  top: 12px !important;
+  top: 13px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 4px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 1.45s linear infinite, final 0.2s 4s forwards, spot-48 0.7s 0.4/random 20.3s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.4s 1.45s linear infinite, final 0.2s 4s forwards, spot-48 0.7s 0.4/random 20.3s linear infinite !important;
+  padding: 2.75px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.55s linear infinite, final 0.2s 4s forwards, spot-48 0.7s 0.4/random 20.6s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 0.55s linear infinite, final 0.2s 4s forwards, spot-48 0.7s 0.4/random 20.6s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(49) {
   top: 10px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 4.5px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 0.35s linear infinite, final 0.2s 4s forwards, spot-49 0.7s 0.4/random 20.4s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.4s 0.35s linear infinite, final 0.2s 4s forwards, spot-49 0.7s 0.4/random 20.4s linear infinite !important;
+  padding: 3px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 0.95s linear infinite, final 0.2s 4s forwards, spot-49 0.7s 0.4/random 21s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.3s 0.95s linear infinite, final 0.2s 4s forwards, spot-49 0.7s 0.4/random 21s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(50) {
-  top: 7px !important;
+  top: 10px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 5.25px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 1.05s linear infinite, final 0.2s 4s forwards, spot-50 0.7s 0.4/random 20.2s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.2s 1.05s linear infinite, final 0.2s 4s forwards, spot-50 0.7s 0.4/random 20.2s linear infinite !important;
+  padding: 4.75px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 0.45s linear infinite, final 0.2s 4s forwards, spot-50 0.7s 0.4/random 21s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.3s 0.45s linear infinite, final 0.2s 4s forwards, spot-50 0.7s 0.4/random 21s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(51) {
-  top: 13px !important;
-  left: -34px !important;
-  opacity: 0;
-  padding: 6.75px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 0.95s linear infinite, final 0.2s 4s forwards, spot-51 0.7s 0.4/random 20.5s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.3s 0.95s linear infinite, final 0.2s 4s forwards, spot-51 0.7s 0.4/random 20.5s linear infinite !important;
-}
-
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(52) {
-  top: 9px !important;
-  left: -34px !important;
-  opacity: 0;
-  padding: 6.75px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 0.85s linear infinite, final 0.2s 4s forwards, spot-52 0.7s 0.4/random 20.6s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.1s 0.85s linear infinite, final 0.2s 4s forwards, spot-52 0.7s 0.4/random 20.6s linear infinite !important;
-}
-
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(53) {
-  top: 13px !important;
-  left: -34px !important;
-  opacity: 0;
-  padding: 2.25px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 1.45s linear infinite, final 0.2s 4s forwards, spot-53 0.7s 0.4/random 20.2s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.4s 1.45s linear infinite, final 0.2s 4s forwards, spot-53 0.7s 0.4/random 20.2s linear infinite !important;
-}
-
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(54) {
-  top: 7px !important;
-  left: -34px !important;
-  opacity: 0;
-  padding: 7px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 1.05s linear infinite, final 0.2s 4s forwards, spot-54 0.7s 0.4/random 20.1s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.2s 1.05s linear infinite, final 0.2s 4s forwards, spot-54 0.7s 0.4/random 20.1s linear infinite !important;
-}
-
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(55) {
-  top: 12px !important;
-  left: -34px !important;
-  opacity: 0;
-  padding: 5.5px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 1.35s linear infinite, final 0.2s 4s forwards, spot-55 0.7s 0.4/random 20.5s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.3s 1.35s linear infinite, final 0.2s 4s forwards, spot-55 0.7s 0.4/random 20.5s linear infinite !important;
-}
-
-#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(56) {
-  top: 9px !important;
+  top: 10px !important;
   left: -34px !important;
   opacity: 0;
   padding: 3.25px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 0.35s linear infinite, final 0.2s 4s forwards, spot-56 0.7s 0.4/random 21s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.4s 0.35s linear infinite, final 0.2s 4s forwards, spot-56 0.7s 0.4/random 21s linear infinite !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 1.25s linear infinite, final 0.2s 4s forwards, spot-51 0.7s 0.4/random 20.5s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 1.25s linear infinite, final 0.2s 4s forwards, spot-51 0.7s 0.4/random 20.5s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(52) {
+  top: 13px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 5.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 0.45s linear infinite, final 0.2s 4s forwards, spot-52 0.7s 0.4/random 20.5s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 0.45s linear infinite, final 0.2s 4s forwards, spot-52 0.7s 0.4/random 20.5s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(53) {
+  top: 6px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 7px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 1.45s linear infinite, final 0.2s 4s forwards, spot-53 0.7s 0.4/random 20.5s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.3s 1.45s linear infinite, final 0.2s 4s forwards, spot-53 0.7s 0.4/random 20.5s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(54) {
+  top: 13px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 5.5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 1.25s linear infinite, final 0.2s 4s forwards, spot-54 0.7s 0.4/random 20.5s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 1.25s linear infinite, final 0.2s 4s forwards, spot-54 0.7s 0.4/random 20.5s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(55) {
+  top: 13px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 3.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 1.05s linear infinite, final 0.2s 4s forwards, spot-55 0.7s 0.4/random 20.2s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.3s 1.05s linear infinite, final 0.2s 4s forwards, spot-55 0.7s 0.4/random 20.2s linear infinite !important;
+}
+
+#page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(56) {
+  top: 14px !important;
+  left: -34px !important;
+  opacity: 0;
+  padding: 6.75px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 1.35s linear infinite, final 0.2s 4s forwards, spot-56 0.7s 0.4/random 20.9s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 1.35s linear infinite, final 0.2s 4s forwards, spot-56 0.7s 0.4/random 20.9s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(57) {
@@ -1275,35 +1339,35 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
   left: -34px !important;
   opacity: 0;
   padding: 3.25px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 1.45s linear infinite, final 0.2s 4s forwards, spot-57 0.7s 0.4/random 20.9s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.1s 1.45s linear infinite, final 0.2s 4s forwards, spot-57 0.7s 0.4/random 20.9s linear infinite !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.1s 0.95s linear infinite, final 0.2s 4s forwards, spot-57 0.7s 0.4/random 20.4s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.1s 0.95s linear infinite, final 0.2s 4s forwards, spot-57 0.7s 0.4/random 20.4s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(58) {
-  top: 6px !important;
+  top: 10px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 2.25px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.85s linear infinite, final 0.2s 4s forwards, spot-58 0.7s 0.4/random 20.4s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.2s 0.85s linear infinite, final 0.2s 4s forwards, spot-58 0.7s 0.4/random 20.4s linear infinite !important;
+  padding: 6.5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.2s 0.75s linear infinite, final 0.2s 4s forwards, spot-58 0.7s 0.4/random 20.4s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.2s 0.75s linear infinite, final 0.2s 4s forwards, spot-58 0.7s 0.4/random 20.4s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(59) {
-  top: 6px !important;
+  top: 13px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 5px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 0.55s linear infinite, final 0.2s 4s forwards, spot-59 0.7s 0.4/random 20.3s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.4s 0.55s linear infinite, final 0.2s 4s forwards, spot-59 0.7s 0.4/random 20.3s linear infinite !important;
+  padding: 5.25px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.3s 0.55s linear infinite, final 0.2s 4s forwards, spot-59 0.7s 0.4/random 20.8s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.3s 0.55s linear infinite, final 0.2s 4s forwards, spot-59 0.7s 0.4/random 20.8s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter .button_spots:nth-of-type(60) {
-  top: 8px !important;
+  top: 7px !important;
   left: -34px !important;
   opacity: 0;
-  padding: 7px !important;
-  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 0.65s linear infinite, final 0.2s 4s forwards, spot-60 0.7s 0.4/random 20.2s linear infinite !important;
-          animation: spew 1s 0.3s forwards, rotate 4.4s 0.65s linear infinite, final 0.2s 4s forwards, spot-60 0.7s 0.4/random 20.2s linear infinite !important;
+  padding: 5px !important;
+  -webkit-animation: spew 1s 0.3s forwards, rotate 4.4s 0.75s linear infinite, final 0.2s 4s forwards, spot-60 0.7s 0.4/random 20.6s linear infinite !important;
+          animation: spew 1s 0.3s forwards, rotate 4.4s 0.75s linear infinite, final 0.2s 4s forwards, spot-60 0.7s 0.4/random 20.6s linear infinite !important;
 }
 
 #page-3 .page-container .display .display-container #results #label-container .meter:nth-of-type(3n + 2) {
@@ -1659,6 +1723,33 @@ button:not(#alert-ok):not(.glitchButtonElement):active:not(.glitchButtonElement)
 
 /* Page Three: End*/
 /* Mobile: Start*/
+@media only screen and (max-width: 900px) {
+  #desktop-only {
+    background-color: rgba(157, 205, 223, 0.99);
+    position: fixed;
+    text-align: center;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    z-index: 1000;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    text-align: center;
+  }
+  #desktop-only h2 {
+    color: #fff;
+    margin: 0 20px;
+  }
+}
+
 @media only screen and (max-width: 1440px) {
   #page-1 .title {
     font-size: 4.5rem;
